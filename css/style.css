@@ -1,0 +1,977 @@
+/* ========================================
+   Greenpath Wellness - Professional Development
+   ======================================== */
+
+/* CSS Variables */
+:root {
+    --primary-green: #2d6a4f;
+    --primary-green-dark: #1b4332;
+    --primary-green-light: #40916c;
+    --accent-teal: #52b788;
+    --accent-light: #95d5b2;
+    --neutral-dark: #2b2d42;
+    --neutral-medium: #6c757d;
+    --neutral-light: #f8f9fa;
+    --white: #ffffff;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-size: 16px;
+    background: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', Georgia, serif;
+    line-height: 1.3;
+    font-weight: 700;
+    color: var(--neutral-dark);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-green);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-green-dark);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Header */
+.site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo h1 {
+    font-size: 1.75rem;
+    color: var(--primary-green);
+    margin-bottom: 0.25rem;
+}
+
+.tagline {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.main-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-green);
+    border-bottom-color: var(--primary-green);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--primary-green);
+    color: var(--white);
+    border-color: var(--primary-green);
+}
+
+.btn-primary:hover {
+    background: var(--primary-green-dark);
+    border-color: var(--primary-green-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.btn-secondary:hover {
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Labels & Badges */
+.label {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    background: var(--accent-light);
+    color: var(--primary-green-dark);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+    color: var(--white);
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-content h2 {
+    color: var(--white);
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-cta .btn-secondary {
+    background: var(--white);
+    color: var(--primary-green);
+    border-color: var(--white);
+}
+
+.hero-cta .btn-secondary:hover {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+}
+
+/* Section Styles */
+section {
+    padding: 4rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    margin-bottom: 1rem;
+}
+
+.section-intro {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* Featured Workshop */
+.featured-workshop {
+    background: var(--neutral-light);
+}
+
+.workshop-card {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 3rem;
+}
+
+.workshop-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.meta-item {
+    font-size: 0.95rem;
+}
+
+.meta-item strong {
+    color: var(--primary-green);
+}
+
+.workshop-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.workshop-dates h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.dates-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.dates-list li {
+    padding: 0.75rem;
+    background: var(--neutral-light);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.workshop-price {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--accent-light);
+    border-radius: 8px;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-green-dark);
+}
+
+.price-note {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.workshop-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.highlights-list {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.highlights-list li {
+    padding: 0.75rem 0 0.75rem 2rem;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.highlights-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.approval-badge {
+    background: var(--primary-green);
+    color: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.approval-badge strong {
+    display: block;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.approval-badge .small {
+    font-size: 0.875rem;
+    opacity: 0.9;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.values-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.value-item {
+    padding: 1.5rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-green);
+}
+
+.value-item h4 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.value-item p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Presenters Section */
+.presenters-section {
+    background: var(--neutral-light);
+}
+
+.presenters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.presenter-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.presenter-info h3 {
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.presenter-title {
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Coming Soon Section */
+.coming-soon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0 3rem;
+}
+
+.coming-item {
+    text-align: center;
+    padding: 2rem;
+    background: var(--neutral-light);
+    border-radius: 12px;
+}
+
+.coming-item h3 {
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+}
+
+.newsletter-signup {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+    background: var(--primary-green);
+    color: var(--white);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.newsletter-signup h3 {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.signup-form {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0 1rem;
+}
+
+.signup-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.privacy-note {
+    font-size: 0.875rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Contact Section */
+.contact-section {
+    background: var(--neutral-light);
+}
+
+.contact-info {
+    text-align: center;
+    font-size: 1.125rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+}
+
+/* Workshop Detail Page */
+.workshop-hero {
+    background: linear-gradient(135deg, var(--primary-green-dark) 0%, var(--primary-green) 100%);
+    color: var(--white);
+    padding: 3rem 0 4rem;
+}
+
+.breadcrumb {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.breadcrumb a:hover {
+    color: var(--white);
+}
+
+.workshop-hero-content h1 {
+    color: var(--white);
+    font-size: 2.75rem;
+    margin: 1rem 0;
+}
+
+.workshop-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin-bottom: 2rem;
+}
+
+.workshop-hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.workshop-hero-meta .meta-item {
+    text-align: center;
+}
+
+.meta-label {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.meta-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Info Banner */
+.info-banner {
+    background: var(--accent-light);
+    padding: 1.5rem 0;
+    border-bottom: 3px solid var(--primary-green);
+}
+
+.banner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.banner-highlight strong,
+.banner-dates strong {
+    color: var(--primary-green-dark);
+}
+
+/* Workshop Details Layout */
+.details-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.details-main h2 {
+    margin-bottom: 1.5rem;
+}
+
+.details-main h3 {
+    margin: 2.5rem 0 1rem;
+    color: var(--primary-green);
+}
+
+.learning-outcomes {
+    margin: 2rem 0;
+}
+
+.outcomes-list {
+    list-style: none;
+}
+
+.outcomes-list li {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-green);
+}
+
+.outcomes-list strong {
+    display: block;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.format-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.format-features li {
+    padding: 1rem;
+    background: var(--neutral-light);
+    border-radius: 6px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.testimonials {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--neutral-light);
+    border-radius: 12px;
+}
+
+.testimonial {
+    margin: 1.5rem 0;
+}
+
+.testimonial blockquote {
+    border-left: 4px solid var(--primary-green);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+.presenter-details {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+}
+
+.presenter-details h4 {
+    color: var(--primary-green);
+    margin-bottom: 0.75rem;
+}
+
+/* Sidebar */
+.sidebar-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.sidebar-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.sidebar-card.highlight {
+    background: var(--accent-light);
+}
+
+.details-list {
+    font-size: 0.95rem;
+}
+
+.details-list dt {
+    font-weight: 600;
+    color: var(--primary-green);
+    margin-top: 1rem;
+}
+
+.details-list dd {
+    margin-left: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sessions-list {
+    list-style: none;
+}
+
+.sessions-list li {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--neutral-light);
+    border-radius: 6px;
+}
+
+.session-date .date {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-green);
+    margin-bottom: 0.25rem;
+}
+
+.session-date .time {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.audience-list {
+    list-style: none;
+}
+
+.audience-list li {
+    padding: 0.75rem 0 0.75rem 1.5rem;
+    position: relative;
+}
+
+.audience-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: bold;
+}
+
+/* Registration Section */
+.registration-section {
+    background: var(--neutral-light);
+}
+
+.registration-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.registration-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ticketspice-embed {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2rem;
+}
+
+.ticketspice-embed iframe {
+    display: block;
+    min-height: 800px;
+}
+
+.registration-fallback {
+    text-align: center;
+    padding: 2rem;
+}
+
+.registration-info {
+    max-width: 800px;
+    margin: 3rem auto 0;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 12px;
+}
+
+.steps-list {
+    padding-left: 1.5rem;
+}
+
+.steps-list li {
+    margin-bottom: 1.5rem;
+}
+
+.steps-list strong {
+    color: var(--primary-green);
+}
+
+/* FAQ Section */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.faq-item {
+    padding: 1.5rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+}
+
+.faq-item h3 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--primary-green);
+}
+
+.faq-item p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Contact CTA */
+.contact-cta {
+    background: var(--primary-green);
+    color: var(--white);
+    text-align: center;
+}
+
+.contact-cta h2 {
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.contact-cta a {
+    color: var(--accent-light);
+}
+
+.contact-cta a:hover {
+    color: var(--white);
+}
+
+/* Footer */
+.site-footer {
+    background: var(--neutral-dark);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 0 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: var(--white);
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .workshop-hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .main-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .workshop-card {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+    .details-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .workshop-hero-meta {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .banner-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-cta,
+    .workshop-actions,
+    .signup-form {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .workshop-hero-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .workshop-meta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
