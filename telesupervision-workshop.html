@@ -240,28 +240,152 @@
             <div class="container">
                 <div class="registration-header">
                     <h2>Secure Your Spot</h2>
-                    <p>Choose your preferred session and register below. You'll receive immediate confirmation with Zoom details and access to course materials.</p>
+                    <p>Choose your preferred session and payment method below. You'll receive confirmation with Zoom details and access to course materials.</p>
+                </div>
+                
+                <!-- Payment Method Tabs -->
+                <div class="registration-tabs">
+                    <button class="tab-btn active" onclick="showTab('credit-card')">
+                        <span class="tab-icon">💳</span>
+                        <span class="tab-label">Credit Card - $42</span>
+                    </button>
+                    <button class="tab-btn" onclick="showTab('venmo')">
+                        <span class="tab-icon">📱</span>
+                        <span class="tab-label">Venmo - $40</span>
+                    </button>
                 </div>
                 
                 <div class="registration-container">
-                    <!-- Ticketspice Embed -->
-                    <div class="ticketspice-embed">
-                        <iframe 
-                            src="https://brandonreeveslcsw.ticketspice.com/louisiana-telesupervision-training?embed=1" 
-                            width="100%" 
-                            height="800" 
-                            frameborder="0"
-                            title="Workshop Registration"
-                            loading="lazy">
-                        </iframe>
+                    <!-- Credit Card Registration (Ticketspice) -->
+                    <div id="credit-card-tab" class="tab-content active">
+                        <div class="payment-method-info">
+                            <h3>Register with Credit Card</h3>
+                            <p>Instant confirmation via Ticketspice. Credit card processing fee included.</p>
+                        </div>
+                        <div class="ticketspice-embed">
+                            <iframe 
+                                src="https://brandonreeveslcsw.ticketspice.com/louisiana-telesupervision-training?embed=1" 
+                                width="100%" 
+                                height="800" 
+                                frameborder="0"
+                                title="Workshop Registration"
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div class="registration-fallback">
+                            <p>Having trouble with the form above?</p>
+                            <a href="https://brandonreeveslcsw.ticketspice.com/louisiana-telesupervision-training" target="_blank" rel="noopener" class="btn btn-secondary">
+                                Open Registration in New Window
+                            </a>
+                        </div>
                     </div>
                     
-                    <!-- Fallback Link -->
-                    <div class="registration-fallback">
-                        <p>Having trouble with the registration form above?</p>
-                        <a href="https://brandonreeveslcsw.ticketspice.com/louisiana-telesupervision-training" target="_blank" rel="noopener" class="btn btn-secondary">
-                            Open Registration in New Window
-                        </a>
+                    <!-- Venmo Registration Form -->
+                    <div id="venmo-tab" class="tab-content">
+                        <div class="payment-method-info">
+                            <h3>Register with Venmo</h3>
+                            <p>Save $2! Fill out the form below and send payment via Venmo.</p>
+                        </div>
+                        
+                        <div class="venmo-registration-card">
+                            <div class="venmo-instructions">
+                                <h4>How Venmo Registration Works</h4>
+                                <ol class="venmo-steps">
+                                    <li>Complete the registration form below</li>
+                                    <li>Send <strong>$40</strong> via Venmo to <strong>@GinaRossiLCSW</strong></li>
+                                    <li>We'll confirm your registration within 24 hours</li>
+                                    <li>You'll receive your Zoom link and workshop materials</li>
+                                </ol>
+                            </div>
+                            
+                            <form class="venmo-form" id="venmoRegistrationForm">
+                                <h4>Registration Information</h4>
+                                
+                                <div class="form-group">
+                                    <label for="fullName">Full Name <span class="required">*</span></label>
+                                    <input 
+                                        type="text" 
+                                        id="fullName" 
+                                        name="fullName" 
+                                        required
+                                        placeholder="Your full name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        required
+                                        placeholder="your.email@example.com">
+                                    <small class="form-help">We'll send your Zoom link and CE certificate to this address</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Phone Number <span class="required">*</span></label>
+                                    <input 
+                                        type="tel" 
+                                        id="phone" 
+                                        name="phone" 
+                                        required
+                                        placeholder="(555) 123-4567">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="session">Select Your Workshop Session <span class="required">*</span></label>
+                                    <select id="session" name="session" required>
+                                        <option value="">-- Choose a date --</option>
+                                        <option value="February 19, 2026 - 5:00 PM CST">February 19, 2026 • 5:00 PM - 6:30 PM CST</option>
+                                        <option value="March 6, 2026 - 5:00 PM CST">March 6, 2026 • 5:00 PM - 6:30 PM CST</option>
+                                        <option value="March 26, 2026 - 5:00 PM CST">March 26, 2026 • 5:00 PM - 6:30 PM CST</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="venmoUsername">Venmo Username (Optional)</label>
+                                    <input 
+                                        type="text" 
+                                        id="venmoUsername" 
+                                        name="venmoUsername" 
+                                        placeholder="@YourVenmoName">
+                                    <small class="form-help">Helps us match your payment</small>
+                                </div>
+                                
+                                <div class="venmo-payment-reminder">
+                                    <p><strong>📱 Payment Instructions:</strong></p>
+                                    <p>Send <strong>$40</strong> to Venmo: <strong>@GinaRossiLCSW</strong></p>
+                                    <p class="small">Please include your name in the Venmo note</p>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block btn-large">
+                                    Submit Registration
+                                </button>
+                                
+                                <p class="form-note">
+                                    <small>By submitting this form, you agree to send payment via Venmo to @GinaRossiLCSW. 
+                                    Your registration will be confirmed once payment is received.</small>
+                                </p>
+                            </form>
+                            
+                            <div class="venmo-confirmation" id="venmoConfirmation" style="display: none;">
+                                <div class="confirmation-icon">✅</div>
+                                <h3>Registration Submitted!</h3>
+                                <p>Thank you! Your registration information has been sent.</p>
+                                <div class="next-steps-box">
+                                    <h4>Next Steps:</h4>
+                                    <ol>
+                                        <li>Send <strong>$40</strong> via Venmo to <strong>@GinaRossiLCSW</strong></li>
+                                        <li>Include your name in the Venmo payment note</li>
+                                        <li>We'll confirm your registration within 24 hours</li>
+                                        <li>Watch for your Zoom link and materials via email</li>
+                                    </ol>
+                                    <a href="https://venmo.com/GinaRossiLCSW" target="_blank" rel="noopener" class="btn btn-primary">
+                                        Open Venmo to Pay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -354,5 +478,71 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            const selectedTab = document.getElementById(tabName + '-tab');
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+        }
+
+        // Venmo form submission
+        document.getElementById('venmoRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = {
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                session: document.getElementById('session').value,
+                venmoUsername: document.getElementById('venmoUsername').value || 'Not provided'
+            };
+            
+            // Create email body
+            const emailSubject = encodeURIComponent('Venmo Workshop Registration - ' + formData.name);
+            const emailBody = encodeURIComponent(
+                'New Venmo Registration:\n\n' +
+                'Name: ' + formData.name + '\n' +
+                'Email: ' + formData.email + '\n' +
+                'Phone: ' + formData.phone + '\n' +
+                'Session: ' + formData.session + '\n' +
+                'Venmo Username: ' + formData.venmoUsername + '\n\n' +
+                'Payment: $40 via Venmo to @GinaRossiLCSW\n' +
+                'Status: Awaiting payment confirmation'
+            );
+            
+            // Send email via mailto
+            window.location.href = 'mailto:ginarossilcsw@gmail.com?subject=' + emailSubject + '&body=' + emailBody;
+            
+            // Show confirmation message
+            setTimeout(function() {
+                document.getElementById('venmoRegistrationForm').style.display = 'none';
+                document.querySelector('.venmo-instructions').style.display = 'none';
+                document.getElementById('venmoConfirmation').style.display = 'block';
+                
+                // Scroll to confirmation
+                document.getElementById('venmoConfirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 500);
+        });
+    </script>
 </body>
 </html>
