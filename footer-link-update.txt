@@ -1,0 +1,5 @@
+We need to add the following to all Greenpath Wellness HTML footers:
+
+After the existing copyright line in footer-bottom, add:
+
+<p style="margin-top:0.75rem;font-size:0.9rem">Presented by <a href="https://brandonreeveslcsw.com">Brandon Reeves, LCSW</a></p>
