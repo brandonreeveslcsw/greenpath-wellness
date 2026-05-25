@@ -871,41 +871,6 @@ section {
     padding: 2rem;
 }
 
-/* Venmo Registration Form */
-.venmo-registration-card {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 2.5rem;
-    box-shadow: var(--shadow-lg);
-}
-
-.venmo-instructions {
-    background: var(--accent-light);
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 2.5rem;
-}
-
-.venmo-instructions h4 {
-    color: var(--primary-green-dark);
-    margin-bottom: 1rem;
-}
-
-.venmo-steps {
-    margin: 0;
-    padding-left: 1.5rem;
-}
-
-.venmo-steps li {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-}
-
-.venmo-form h4 {
-    margin-bottom: 1.5rem;
-    color: var(--primary-green);
-}
-
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -946,25 +911,6 @@ section {
     color: var(--text-secondary);
 }
 
-.venmo-payment-reminder {
-    background: var(--primary-green);
-    color: var(--white);
-    padding: 1.5rem;
-    border-radius: 8px;
-    margin: 2rem 0;
-    text-align: center;
-}
-
-.venmo-payment-reminder p {
-    margin-bottom: 0.5rem;
-}
-
-.venmo-payment-reminder .small {
-    font-size: 0.875rem;
-    opacity: 0.9;
-    margin: 0;
-}
-
 .form-note {
     text-align: center;
     margin-top: 1.5rem;
@@ -975,19 +921,8 @@ section {
     font-size: 0.875rem;
 }
 
-/* Venmo Confirmation */
-.venmo-confirmation {
-    text-align: center;
-    padding: 3rem 2rem;
-}
-
 .confirmation-icon {
     font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.venmo-confirmation h3 {
-    color: var(--primary-green);
     margin-bottom: 1rem;
 }
 
