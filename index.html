@@ -249,7 +249,8 @@
                 <div class="newsletter-signup">
                     <h3>Get Updates</h3>
                     <p>Join our mailing list to be notified about new workshops and courses.</p>
-                    <form class="signup-form" action="#" method="POST">
+                    <form class="signup-form" action="#" method="POST" name="newsletter-signup" data-netlify="true">
+                        <input type="hidden" name="form-name" value="newsletter-signup" />
                         <input type="email" name="email" placeholder="Your email address" required>
                         <button type="submit" class="btn btn-primary">Subscribe</button>
                     </form>
