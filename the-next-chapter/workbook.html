@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Next Chapter — A Working Guide to Independence</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6;
+    --paper-raised:#FBF9F3;
+    --ink:#232A3B;
+    --ink-soft:#565F72;
+    --sage:#55705C;
+    --sage-deep:#3E5744;
+    --ochre:#B8863B;
+    --rose:#A2564F;
+    --line:#D8D2C2;
+    --line-soft:#E7E2D4;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Karla',sans-serif;
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:var(--sage-deep);}
+
+  /* Layout */
+  .app{display:flex; min-height:100vh;}
+  .rail{
+    width:260px; flex-shrink:0;
+    background:var(--paper-raised);
+    border-right:1px solid var(--line);
+    padding:28px 18px;
+    position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  .rail-title{
+    font-size:13px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin:0 0 4px 4px;
+  }
+  .rail-name{
+    font-family:'Fraunces',serif; font-size:22px; font-weight:600;
+    margin:0 0 26px 4px; line-height:1.2;
+  }
+  .trail{position:relative; padding-left:28px;}
+  .trail::before{
+    content:""; position:absolute; left:9px; top:10px; bottom:10px; width:2px;
+    background:linear-gradient(var(--line) 0%, var(--line) 100%);
+  }
+  .waypoint{
+    position:relative; margin-bottom:4px;
+  }
+  .waypoint button{
+    all:unset; display:block; width:100%; cursor:pointer;
+    padding:10px 12px 10px 8px; border-radius:8px;
+    font-size:14.5px; color:var(--ink-soft);
+    transition:background .15s ease, color .15s ease;
+  }
+  .waypoint button:hover{background:var(--line-soft);}
+  .waypoint.active button{background:var(--ink); color:var(--paper-raised); font-weight:600;}
+  .waypoint-dot{
+    position:absolute; left:-28px; top:14px; width:20px; height:20px; border-radius:50%;
+    background:var(--paper-raised); border:2px solid var(--line); z-index:2;
+    display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--ink-soft);
+  }
+  .waypoint.done .waypoint-dot{background:var(--sage); border-color:var(--sage-deep); color:#fff;}
+  .waypoint.active .waypoint-dot{border-color:var(--ink);}
+
+  .rail-actions{margin-top:30px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:8px;}
+  .rail-btn{
+    all:unset; cursor:pointer; font-size:13px; color:var(--ink-soft);
+    padding:8px 10px; border-radius:6px; text-align:left;
+  }
+  .rail-btn:hover{background:var(--line-soft); color:var(--ink);}
+  .save-status{font-size:12px; color:var(--ink-soft); margin-top:14px; padding-left:10px; min-height:16px;}
+  .storage-note{font-size:11.5px; color:var(--ink-soft); margin:2px 10px 0; line-height:1.4;}
+  .rail-copyright{font-size:10.5px; color:var(--ink-soft); margin:20px 10px 0; line-height:1.4; opacity:.75;}
+
+  .main{flex:1; padding:44px 56px 120px; max-width:880px;}
+  .module{display:none;}
+  .module.visible{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  .module-eyebrow{font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--sage-deep); font-weight:600; margin-bottom:8px;}
+  .module h1{font-size:34px; margin:0 0 10px;}
+  .module-intro{color:var(--ink-soft); font-size:15.5px; max-width:60ch; margin-bottom:20px;}
+  .framing-quote{
+    font-family:'Fraunces',serif; font-style:italic; font-size:16.5px; color:var(--sage-deep);
+    max-width:58ch; margin:0 0 32px; padding-left:16px; border-left:2px solid var(--sage);
+  }
+
+  .card{
+    background:var(--paper-raised); border:1px solid var(--line); border-radius:14px;
+    padding:26px 28px; margin-bottom:26px;
+  }
+  .card h2{font-size:19px; margin:0 0 6px;}
+  .card-sub{color:var(--ink-soft); font-size:14px; margin:0 0 18px;}
+
+  label{display:block; font-size:13px; color:var(--ink-soft); margin-bottom:5px; font-weight:600;}
+  input[type=text], input[type=number], input[type=date], textarea, select{
+    width:100%; font-family:'Karla',sans-serif; font-size:15px; color:var(--ink);
+    background:#fff; border:1px solid var(--line); border-radius:8px;
+    padding:9px 11px; margin-bottom:14px;
+  }
+  input:focus, textarea:focus, select:focus{outline:2px solid var(--sage); outline-offset:1px; border-color:var(--sage);}
+  textarea{resize:vertical; min-height:64px;}
+  .row{display:flex; gap:14px;}
+  .row > div{flex:1;}
+
+  table{width:100%; border-collapse:collapse; margin-bottom:10px;}
+  th{
+    text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); font-weight:600; padding:6px 8px; border-bottom:1px solid var(--line);
+  }
+  td{padding:5px 6px; border-bottom:1px solid var(--line-soft); vertical-align:top;}
+  td input, td textarea, td select{margin-bottom:0;}
+  .del-row{all:unset; cursor:pointer; color:var(--rose); font-size:16px; padding:4px 8px;}
+  .add-row{
+    all:unset; cursor:pointer; font-size:13.5px; color:var(--sage-deep); font-weight:600;
+    padding:8px 4px; display:inline-block; margin-top:4px;
+  }
+  .add-row:hover{text-decoration:underline;}
+
+  .checklist{list-style:none; margin:0 0 14px; padding:0;}
+  .checklist li{display:flex; align-items:flex-start; gap:10px; padding:6px 0; font-size:15px;}
+  .checklist input[type=checkbox]{margin-top:3px; width:16px; height:16px; accent-color:var(--sage);}
+
+  .pill-toggle{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
+  .pill{
+    border:1px solid var(--line); background:#fff; border-radius:20px; padding:6px 14px;
+    font-size:13px; cursor:pointer; color:var(--ink-soft); user-select:none;
+  }
+  .pill.on{background:var(--ink); border-color:var(--ink); color:var(--paper-raised);}
+
+  .milestones{display:flex; gap:10px; margin:6px 0 20px; flex-wrap:wrap;}
+  .milestone{
+    flex:1; min-width:100px; border:1px solid var(--line); border-radius:10px; padding:12px;
+    text-align:center; background:#fff;
+  }
+  .milestone.hit{background:var(--sage); border-color:var(--sage-deep); color:#fff;}
+  .milestone .num{font-family:'Fraunces',serif; font-size:22px; font-weight:600;}
+  .milestone .lbl{font-size:11.5px; color:inherit; opacity:.8;}
+  .count-banner{font-family:'Fraunces',serif; font-size:15px; color:var(--ink-soft); margin-bottom:12px;}
+  .count-banner b{color:var(--ink); font-size:17px;}
+
+  .total-line{display:flex; justify-content:space-between; padding-top:10px; margin-top:6px; border-top:1px solid var(--line); font-weight:600;}
+
+  .note{
+    border-left:3px solid var(--ochre); background:#fbf3e6; padding:12px 16px; border-radius:0 8px 8px 0;
+    font-size:14px; color:#5a4523; margin-bottom:20px;
+  }
+
+  .nav-buttons{display:flex; justify-content:space-between; margin-top:36px;}
+  .nav-buttons button{
+    all:unset; cursor:pointer; font-size:14px; padding:10px 18px; border-radius:8px; border:1px solid var(--line);
+    background:#fff; color:var(--ink);
+  }
+  .nav-buttons button:hover{background:var(--line-soft);}
+
+  .complete-toggle{
+    display:flex; align-items:center; gap:10px; margin-top:8px; padding:14px 0 0;
+    border-top:1px solid var(--line-soft); font-size:14px; color:var(--ink-soft);
+  }
+  .complete-toggle input{width:16px; height:16px; accent-color:var(--sage);}
+
+  #printView, #weeklyView{ display:none; }
+
+  @media print{
+    .app{display:none !important;}
+    body{background:#fff;}
+    body:not(.print-mode-weekly) #printView{ display:block !important; padding: 0 30px; max-width:100%; }
+    body.print-mode-weekly #printView{ display:none !important; }
+    body.print-mode-weekly #weeklyView{ display:block !important; padding: 0 30px; max-width:100%; }
+    body:not(.print-mode-weekly) #weeklyView{ display:none !important; }
+    .pv-doc h1{font-size:22px; margin:0 0 4px;}
+    .pv-doc h2{font-size:16px; margin:26px 0 8px; color:var(--sage-deep);}
+    .pv-doc .pv-module{page-break-before:always;}
+    .pv-doc .pv-module:first-child{page-break-before:auto;}
+    .pv-doc .pv-field{margin-bottom:10px;}
+    .pv-doc .pv-label{font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); font-weight:600; margin-bottom:2px;}
+    .pv-doc .pv-value{white-space:pre-wrap; font-size:14px; line-height:1.5;}
+    .pv-doc table{width:100%; border-collapse:collapse; margin-bottom:14px;}
+    .pv-doc th{text-align:left; font-size:11px; text-transform:uppercase; color:var(--ink-soft); border-bottom:1px solid #999; padding:4px 6px;}
+    .pv-doc td{font-size:13px; border-bottom:1px solid #ddd; padding:6px; vertical-align:top; white-space:pre-wrap;}
+    .pv-doc ul.pv-check{list-style:none; padding:0; margin:0 0 14px;}
+    .pv-doc ul.pv-check li{font-size:14.5px; padding:5px 0;}
+    .pv-doc .pv-empty{color:var(--ink-soft); font-size:13px; font-style:italic;}
+    .pv-doc .pv-notes-box{border:1px solid #ccc; min-height:180px; border-radius:6px;}
+    .pv-doc .pv-tracker{width:100%; border-collapse:collapse; margin-bottom:16px;}
+    .pv-doc .pv-tracker th{font-size:10.5px; text-transform:uppercase; color:var(--ink-soft); border-bottom:1px solid #999; padding:5px 4px; text-align:center;}
+    .pv-doc .pv-tracker th:first-child{text-align:left;}
+    .pv-doc .pv-tracker td{font-size:13px; border-bottom:1px solid #ddd; padding:7px 4px; text-align:center;}
+    .pv-doc .pv-tracker td:first-child{text-align:left; padding-right:10px;}
+    .pv-doc .pv-doc-sub{font-size:13px; color:var(--ink-soft); margin:0 0 10px;}
+    .pv-doc .pv-tracker-label{font-weight:600; font-size:13.5px; margin:16px 0 6px;}
+    .pv-doc .pv-tracker-list{list-style:none; padding:0; margin:0 0 4px; columns:2; column-gap:30px;}
+    .pv-doc .pv-tracker-list li{font-size:13.5px; padding:5px 0; break-inside:avoid;}
+  }
+
+  @media (max-width: 820px){
+    .app{flex-direction:column;}
+    .rail{position:relative; width:100%; height:auto; border-right:none; border-bottom:1px solid var(--line);}
+    .trail{display:flex; overflow-x:auto; padding-left:8px; gap:4px;}
+    .trail::before{display:none;}
+    .waypoint-dot{position:static; margin-right:6px;}
+    .waypoint button{display:flex; align-items:center; white-space:nowrap;}
+    .main{padding:28px 20px 100px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail">
+    <p class="rail-title">A working guide</p>
+    <p class="rail-name">The Next Chapter</p>
+    <div class="trail" id="trail"></div>
+    <div class="rail-actions">
+      <button class="rail-btn" onclick="printWorkbook()">↓ Print / Save as PDF</button>
+      <button class="rail-btn" onclick="printWeeklyGuide()">📋 Weekly Guide (PDF)</button>
+      <button class="rail-btn" onclick="exportData()">⬇ Download a backup file</button>
+      <button class="rail-btn" onclick="document.getElementById('importFile').click()">⬆ Load a backup file</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(this.files[0])">
+      <button class="rail-btn" onclick="resetAll()">↺ Clear my answers</button>
+    </div>
+    <div class="save-status" id="saveStatus"></div>
+    <p class="storage-note" id="storageNote"></p>
+    <p class="rail-copyright">© 2026 Brandon Reeves, LCSW. For personal and family use only — not for resale or redistribution.</p>
+  </nav>
+
+  <main class="main" id="main"></main>
+</div>
+
+<div id="printView" class="pv-doc"></div>
+<div id="weeklyView" class="pv-doc"></div>
+
+<script>
+const MODULES = [
+  {id:"foundation", label:"0 · Foundation"},
+  {id:"financial", label:"1 · Money & Logistics"},
+  {id:"career", label:"2 · Career & Search"},
+  {id:"emotional", label:"3 · Resilience"},
+  {id:"progress", label:"4 · Progress & Wins"},
+  {id:"household", label:"5 · Household & Skills"},
+  {id:"relational", label:"6 · Staying Connected"},
+  {id:"aftermove", label:"7 · After the Move"},
+];
+
+function defaultState(){
+  return {
+    moduleComplete: {},
+    foundation: {
+      why:"",
+      situation: {support:'', timeline:'', considerations: []},
+      agreement: [], goalNow:"", goalReady:"", targetDate:"",
+      planB: {ifNot:'', checkinDate:''}
+    },
+    financial: {costs: [], income:"", currentSavings:"", moveInCosts: [], cushionMonths:"3", cushionCustom:"", literacy:{}},
+    career: {industries: [], applications: [], rejections: [], checklist:{}, successType:'', milestoneReflections:{}, milestoneMarks:{}, wins: [], weeklyAppGoal:'', weeklyNetworkGoal:''},
+    household: {routine: [], moveOut:{}},
+    emotional: {reflections:{}},
+    progress: {lifeWins: [], reflections:{proud:'', working:'', easier:''}},
+    relational: {checkins: [], scripts:{}},
+    aftermove: {checkins: [], notes:{}, taper: []}
+  };
+}
+let state = defaultState();
+
+let current = "foundation";
+let saveTimer = null;
+const STORAGE_KEY = 'the-next-chapter-workbook';
+
+function storageIsAvailable(){
+  try{
+    const t = '__test__';
+    localStorage.setItem(t, '1');
+    localStorage.removeItem(t);
+    return true;
+  }catch(e){ return false; }
+}
+const STORAGE_OK = storageIsAvailable();
+
+function uid(){ return Math.random().toString(36).slice(2,9); }
+
+function mergeWithDefaults(loaded){
+  const defaults = defaultState();
+  const merged = {};
+  Object.keys(defaults).forEach(key=>{
+    if(loaded && Object.prototype.hasOwnProperty.call(loaded, key)){
+      merged[key] = Object.assign({}, defaults[key], loaded[key]);
+    } else {
+      merged[key] = defaults[key];
+    }
+  });
+  return merged;
+}
+
+function loadState(){
+  const noteEl = document.getElementById('storageNote');
+  if(STORAGE_OK){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        const loaded = JSON.parse(raw);
+        state = mergeWithDefaults(loaded);
+      }
+      if(noteEl) noteEl.textContent = "Saves automatically in this browser. Download a backup file if you'll switch devices or clear browser data.";
+    }catch(e){
+      if(noteEl) noteEl.textContent = "Couldn't read saved progress — starting fresh. Your work still auto-saves from here.";
+    }
+  } else {
+    if(noteEl) noteEl.textContent = "This browser/preview can't auto-save. Download a backup file often, or open this file directly in a normal browser tab to enable auto-save.";
+  }
+  render();
+}
+
+function queueSave(){
+  const el = document.getElementById('saveStatus');
+  if(!STORAGE_OK){
+    if(el) el.textContent = "Not auto-saving here — download a backup to keep your work";
+    return;
+  }
+  if(el) el.textContent = "Saving…";
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      if(el) el.textContent = "Saved just now, in this browser";
+    }catch(e){
+      if(el) el.textContent = "Couldn't save — download a backup to keep your work";
+    }
+  }, 400);
+}
+
+function exportData(){
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `next-chapter-progress-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importData(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    try{
+      const loaded = JSON.parse(e.target.result);
+      if(!confirm("This replaces your current answers with the backup file. Continue?")) return;
+      state = mergeWithDefaults(loaded);
+      queueSave();
+      render();
+    }catch(err){
+      alert("That file doesn't look like a valid backup. Nothing was changed.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+function resetAll(){
+  if(!confirm("This clears everything you've filled in. Continue?")) return;
+  if(STORAGE_OK){ try{ localStorage.removeItem(STORAGE_KEY); }catch(e){} }
+  state = defaultState();
+  queueSave();
+  render();
+}
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  trail.innerHTML = MODULES.map((m,i)=>`
+    <div class="waypoint ${current===m.id?'active':''} ${state.moduleComplete[m.id]?'done':''}">
+      <div class="waypoint-dot">${state.moduleComplete[m.id] ? '✓' : i}</div>
+      <button onclick="goTo('${m.id}')">${m.label}</button>
+    </div>
+  `).join('');
+}
+
+function goTo(id){
+  current = id;
+  render();
+  document.getElementById('main').scrollTo(0,0);
+  window.scrollTo(0,0);
+}
+
+function completeToggle(moduleId){
+  return `<div class="complete-toggle">
+    <input type="checkbox" ${state.moduleComplete[moduleId]?'checked':''} onchange="state.moduleComplete['${moduleId}']=this.checked; queueSave(); renderTrail();">
+    <span>Mark this section as done for now — you can always come back.</span>
+  </div>`;
+}
+
+function navButtons(){
+  const i = MODULES.findIndex(m=>m.id===current);
+  const prev = MODULES[i-1], next = MODULES[i+1];
+  return `<div class="nav-buttons">
+    <button ${!prev?'style="visibility:hidden"':''} onclick="goTo('${prev?prev.id:''}')">← ${prev?prev.label:''}</button>
+    <button ${!next?'style="visibility:hidden"':''} onclick="goTo('${next?next.id:''}')">${next?next.label:''} →</button>
+  </div>`;
+}
+
+// ---------- FOUNDATION ----------
+const SUPPORT_OPTIONS = ["Full financial support","Partial support","Minimal support","Fully self-funding"];
+const TIMELINE_OPTIONS = ["Working toward a target date","Open-ended, no fixed date","Extended time at home is the plan, not a problem"];
+const CONSIDERATION_OPTIONS = ["Neurodivergence or a learning difference","Chronic illness or ongoing health need","Mental health considerations","Single-parent or one-income household","Cultural expectation of extended time at home","Other"];
+
+function setSupport(v){ state.foundation.situation.support = v; queueSave(); render(); }
+function setTimeline(v){ state.foundation.situation.timeline = v; queueSave(); render(); }
+function toggleConsideration(v){
+  const arr = state.foundation.situation.considerations;
+  const i = arr.indexOf(v);
+  if(i>-1) arr.splice(i,1); else arr.push(v);
+  queueSave(); render();
+}
+
+function situationNote(){
+  const s = state.foundation.situation;
+  const notes = [];
+  if(s.support==="Minimal support" || s.support==="Fully self-funding"){
+    notes.push("The Money module ahead is built assuming some family support — skim it and use only what's relevant to your situation.");
+  }
+  if(s.timeline==="Extended time at home is the plan, not a problem"){
+    notes.push("Target dates elsewhere in this workbook are optional for you — treat them as milestones to notice, not deadlines to hit.");
+  }
+  if(s.considerations.includes("Neurodivergence or a learning difference") || s.considerations.includes("Chronic illness or ongoing health need")){
+    notes.push("Pacing matters more than speed here — adjust every module's timeline to fit what's realistic, not what's typical.");
+  }
+  return notes.length ? `<div class="note">${notes.join('<br><br>')}</div>` : '';
+}
+
+function renderFoundation(){
+  const a = state.foundation;
+  const s = a.situation;
+  return `
+  <p class="module-eyebrow">Module 0</p>
+  <h1>Foundation</h1>
+  <p class="module-intro">Before the checklists and trackers, get clear on why this matters and what everyone's agreeing to. This module works best filled out together.</p>
+  <p class="framing-quote">"Every time you're tempted to fix something for them, ask: is this building their self-trust, or quietly telling them I don't think they can do it themselves?"</p>
+
+  <div class="card">
+    <h2>Your situation</h2>
+    <p class="card-sub">This isn't a form to get "right" — it just tells the rest of the workbook how to adapt to what's actually true for you.</p>
+    <label>Financial support available right now</label>
+    <div class="pill-toggle">${SUPPORT_OPTIONS.map(o=>`<span class="pill ${s.support===o?'on':''}" onclick="setSupport('${o}')">${o}</span>`).join('')}</div>
+    <label>Timeline</label>
+    <div class="pill-toggle">${TIMELINE_OPTIONS.map(o=>`<span class="pill ${s.timeline===o?'on':''}" onclick="setTimeline('${o}')">${o}</span>`).join('')}</div>
+    <label>Anything else shaping the pace of this</label>
+    <div class="pill-toggle">${CONSIDERATION_OPTIONS.map(o=>`<span class="pill ${s.considerations.includes(o)?'on':''}" onclick="toggleConsideration('${o}')">${o}</span>`).join('')}</div>
+    ${situationNote()}
+  </div>
+
+  <div class="card">
+    <h2>Why this, why now</h2>
+    <p class="card-sub">A few honest sentences — from whoever is guiding this, and from the person moving toward independence — about why this chapter matters.</p>
+    <label>In our own words</label>
+    <textarea oninput="state.foundation.why=this.value; queueSave();" placeholder="e.g. We're doing this because...">${a.why}</textarea>
+  </div>
+
+  <div class="card">
+    <h2>Where we are → where we're headed</h2>
+    <div class="row">
+      <div><label>Right now, things look like...</label><textarea oninput="state.foundation.goalNow=this.value; queueSave();">${a.goalNow}</textarea></div>
+      <div><label>"Ready" will look like...</label><textarea oninput="state.foundation.goalReady=this.value; queueSave();">${a.goalReady}</textarea></div>
+    </div>
+    <label>Rough target date (it's okay to guess)</label>
+    <input type="text" value="${a.targetDate}" oninput="state.foundation.targetDate=this.value; queueSave();" placeholder="e.g. End of this year, or 'no fixed date yet'">
+  </div>
+
+  <div class="card">
+    <h2>Support Agreement</h2>
+    <p class="card-sub">List what's currently being covered, by whom, and what — if anything — is expected in return. There's no required "right" model here; different families land in different places, and this is meant to be renegotiated as things change.</p>
+    <p class="card-sub" style="margin-top:-8px;">Easy to forget a category until it's already a problem — the dropdown below covers the usual suspects (housing, insurance, transportation, phone, food) so nothing slips through by accident. Pick "Other" for anything specific to your situation.</p>
+    <table>
+      <tr><th style="width:32%">Area</th><th>Currently covered by</th><th>What's expected in return</th><th></th></tr>
+      <tbody id="agreementRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('foundation','agreement',{area:'',areaCustom:'',coveredBy:'',expected:''})">+ Add a line</button>
+  </div>
+
+  <div class="card">
+    <h2>Plan B</h2>
+    <p class="card-sub">Good plans include what happens if the timeline slips. Deciding this now — together — turns a stall at month six into a planned check-in instead of a blowup.</p>
+    <label>If we haven't hit the goal by the target date, then...</label>
+    <textarea oninput="state.foundation.planB.ifNot=this.value; queueSave();" placeholder="e.g. We revisit the support agreement, look at part-time options, extend the date by X months...">${a.planB.ifNot}</textarea>
+    <label>We'll revisit this plan on</label>
+    <input type="date" value="${a.planB.checkinDate}" oninput="state.foundation.planB.checkinDate=this.value; queueSave();">
+  </div>
+
+  ${completeToggle('foundation')}
+  ${navButtons()}
+  `;
+}
+const AREA_OPTIONS = [
+  "Rent / housing",
+  "Utilities (electric, water, gas)",
+  "Internet / Wi-Fi",
+  "Cell phone",
+  "Food / groceries",
+  "Car payment",
+  "Car insurance",
+  "Gas / transportation costs",
+  "Health insurance",
+  "Dental / vision insurance",
+  "Prescriptions / medical costs",
+  "Renters or life insurance",
+  "Household supplies",
+  "Subscriptions (streaming, etc.)",
+  "Personal spending / stipend",
+  "Other (type your own)"
+];
+function renderAgreementRows(){
+  const rows = state.foundation.agreement;
+  document.getElementById('agreementRows').innerHTML = rows.map((r,i)=>`
+    <tr>
+      <td>
+        <select onchange="state.foundation.agreement[${i}].area=this.value; queueSave(); renderAgreementRows();">
+          <option value="" ${!r.area?'selected':''} disabled>Choose a category…</option>
+          ${AREA_OPTIONS.map(o=>`<option ${r.area===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+        ${r.area==="Other (type your own)" ? `<input type="text" value="${r.areaCustom||''}" oninput="state.foundation.agreement[${i}].areaCustom=this.value; queueSave();" placeholder="Describe it" style="margin-top:6px;">` : ''}
+      </td>
+      <td><input type="text" value="${r.coveredBy}" oninput="state.foundation.agreement[${i}].coveredBy=this.value; queueSave();" placeholder="e.g. Parents, through Dec"></td>
+      <td><input type="text" value="${r.expected}" oninput="state.foundation.agreement[${i}].expected=this.value; queueSave();" placeholder="e.g. Nothing / help with chores / rent once employed"></td>
+      <td><button class="del-row" onclick="delRow('foundation','agreement',${i})">✕</button></td>
+    </tr>`).join('');
+}
+
+// ---------- FINANCIAL ----------
+const LITERACY_ITEMS = [
+  "I roughly understand what a credit score is and why it matters for renting or financing something",
+  "I know what a lease typically requires (deposit, first/last month, credit check, sometimes a guarantor)",
+  "I can read a pay stub and understand what's being withheld and why",
+  "I know roughly when I age off a parent's health insurance and what my options are after that",
+  "I know what to check before accepting a job offer (salary, benefits, start date, time off)"
+];
+
+function renderFinancial(){
+  const f = state.financial;
+  const total = f.costs.reduce((s,c)=>s + (parseFloat(c.amount)||0), 0);
+  const support = state.foundation.situation.support;
+  const supportNote = (support==="Minimal support" || support==="Fully self-funding")
+    ? `<div class="note">Since you're mostly or fully self-funding this move, the cost worksheet below matters even more — and the budget starter is probably the section to focus on first.</div>`
+    : '';
+  return `
+  <p class="module-eyebrow">Module 1</p>
+  <h1>Money &amp; Logistics</h1>
+  <p class="module-intro">Independence gets a lot less scary once the real numbers are on paper. Fill in your own city's costs — don't guess from someone else's budget.</p>
+  <p class="framing-quote">"A lot of what looks like avoidance is actually just never having been taught the mechanics. If you check 'no' on most of the list below, that's not a character problem — it's a to-do list."</p>
+  ${supportNote}
+
+  <div class="card">
+    <h2>Financial literacy basics</h2>
+    <p class="card-sub">Check off what you're already confident about. The rest is worth a conversation or a quick look-up before you need it in a hurry.</p>
+    <ul class="checklist" id="literacyChecklist"></ul>
+  </div>
+
+  <div class="card">
+    <h2>Real cost of living, on your own</h2>
+    <p class="card-sub">The same categories from your Support Agreement, but with real numbers this time — what would each actually cost if nobody else were covering it? Pick from the dropdown so nothing gets forgotten until the bill shows up.</p>
+    <table>
+      <tr><th style="width:32%">Category</th><th>Monthly estimate</th><th>Notes</th><th></th></tr>
+      <tbody id="costRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('financial','costs',{category:'',categoryCustom:'',amount:'',notes:''})">+ Add a category</button>
+    <div class="total-line"><span>Estimated monthly total</span><span class="mono" id="costTotalDisplay">$${total.toFixed(2)}</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Move-In &amp; Savings Plan</h2>
+    <p class="card-sub">This section does the math for you, using the monthly total from above plus one-time costs to get moving in the first place. Change any number and everything below updates.</p>
+
+    <label>One-time move-in costs</label>
+    <table>
+      <tr><th style="width:40%">Item</th><th>Estimated cost</th><th></th></tr>
+      <tbody id="moveInRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('financial','moveInCosts',{item:'',itemCustom:'',amount:''})">+ Add a one-time cost</button>
+    <div class="total-line"><span>One-time move-in total</span><span class="mono" id="moveInTotalDisplay">$0.00</span></div>
+
+    <div style="margin-top:22px;">
+      <label>Safety cushion — how many months of expenses saved before moving?</label>
+      <div class="pill-toggle" id="cushionPills"></div>
+      <div id="cushionCustomWrap"></div>
+    </div>
+
+    <div class="row" style="margin-top:6px;">
+      <div><label>Current savings</label><input type="text" id="currentSavingsInput" value="${f.currentSavings}" oninput="state.financial.currentSavings=this.value; queueSave(); renderBudgetSummary();" placeholder="$"></div>
+      <div><label>Expected monthly income once working</label><input type="text" id="incomeInput" value="${f.income}" oninput="state.financial.income=this.value; queueSave(); renderBudgetSummary();" placeholder="$"></div>
+    </div>
+
+    <div class="card" style="background:var(--paper); margin-top:10px; margin-bottom:0;" id="budgetSummary"></div>
+  </div>
+
+  ${completeToggle('financial')}
+  ${navButtons()}
+  `;
+}
+const MOVEIN_OPTIONS = [
+  "Security deposit",
+  "First month's rent",
+  "Moving costs (truck, movers, supplies)",
+  "Furniture & setup basics",
+  "Utility setup / connection fees",
+  "Application or credit-check fees",
+  "Other (type your own)"
+];
+function setCushion(v){ state.financial.cushionMonths = v; queueSave(); render(); }
+function renderMoveInRows(){
+  const el = document.getElementById('moveInRows');
+  if(!el) return;
+  el.innerHTML = state.financial.moveInCosts.map((m,i)=>`
+    <tr>
+      <td>
+        <select onchange="state.financial.moveInCosts[${i}].item=this.value; queueSave(); renderMoveInRows();">
+          <option value="" ${!m.item?'selected':''} disabled>Choose an item…</option>
+          ${MOVEIN_OPTIONS.map(o=>`<option ${m.item===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+        ${m.item==="Other (type your own)" ? `<input type="text" value="${m.itemCustom||''}" oninput="state.financial.moveInCosts[${i}].itemCustom=this.value; queueSave();" placeholder="Describe it" style="margin-top:6px;">` : ''}
+      </td>
+      <td><input type="number" value="${m.amount}" oninput="state.financial.moveInCosts[${i}].amount=this.value; queueSave(); renderBudgetSummary();" placeholder="0"></td>
+      <td><button class="del-row" onclick="delRow('financial','moveInCosts',${i}); renderBudgetSummary();">✕</button></td>
+    </tr>`).join('');
+}
+function renderCushionPills(){
+  const el = document.getElementById('cushionPills');
+  const wrap = document.getElementById('cushionCustomWrap');
+  if(!el) return;
+  const opts = [["1","1 month"],["3","3 months"],["6","6 months"],["custom","Custom"]];
+  el.innerHTML = opts.map(([v,label])=>`<span class="pill ${state.financial.cushionMonths===v?'on':''}" onclick="setCushion('${v}')">${label}</span>`).join('');
+  if(state.financial.cushionMonths==="custom"){
+    wrap.innerHTML = `<label>Custom number of months</label><input type="number" value="${state.financial.cushionCustom}" oninput="state.financial.cushionCustom=this.value; queueSave(); renderBudgetSummary();" placeholder="e.g. 4" style="max-width:140px;">`;
+  } else {
+    wrap.innerHTML = '';
+  }
+}
+function renderBudgetSummary(){
+  const f = state.financial;
+  const monthlyTotal = f.costs.reduce((s,c)=>s + (parseFloat(c.amount)||0), 0);
+  const moveInTotal = f.moveInCosts.reduce((s,m)=>s + (parseFloat(m.amount)||0), 0);
+  const cushionMonthsVal = f.cushionMonths==="custom" ? (parseFloat(f.cushionCustom)||0) : parseFloat(f.cushionMonths||0);
+  const cushionAmount = monthlyTotal * cushionMonthsVal;
+  const savingsGoalTotal = moveInTotal + cushionAmount;
+  const currentSavings = parseFloat(f.currentSavings)||0;
+  const income = parseFloat(f.income)||0;
+  const surplus = income - monthlyTotal;
+  const stillNeeded = Math.max(savingsGoalTotal - currentSavings, 0);
+  const monthsToGoal = surplus > 0 && stillNeeded > 0 ? Math.ceil(stillNeeded / surplus) : null;
+
+  const moveInEl = document.getElementById('moveInTotalDisplay');
+  if(moveInEl) moveInEl.textContent = '$' + moveInTotal.toFixed(2);
+
+  let surplusLine;
+  if(income === 0){
+    surplusLine = `<span style="color:var(--ink-soft)">Add expected income above to see whether it covers your monthly costs.</span>`;
+  } else if(surplus >= 0){
+    surplusLine = `Monthly income covers costs with <b>$${surplus.toFixed(2)}</b> left over each month.`;
+  } else {
+    surplusLine = `<span style="color:var(--rose)">Monthly income falls <b>$${Math.abs(surplus).toFixed(2)} short</b> of covering costs — worth revisiting income, costs, or the timeline before locking in a move date.</span>`;
+  }
+
+  let goalLine;
+  if(monthsToGoal){
+    goalLine = `At this rate, reaching your full savings target takes about <b>${monthsToGoal} month${monthsToGoal===1?'':'s'}</b> of saving the full surplus.`;
+  } else if(stillNeeded === 0){
+    goalLine = `Current savings already cover the target — nice work.`;
+  } else {
+    goalLine = `Add an expected income above to estimate how long reaching this target will take.`;
+  }
+
+  const el = document.getElementById('budgetSummary');
+  if(!el) return;
+  el.innerHTML = `
+    <div class="total-line"><span>Monthly cost of living (from above)</span><span class="mono">$${monthlyTotal.toFixed(2)}</span></div>
+    <div class="total-line"><span>+ One-time move-in costs</span><span class="mono">$${moveInTotal.toFixed(2)}</span></div>
+    <div class="total-line"><span>+ Safety cushion (${cushionMonthsVal || 0} mo. × monthly cost)</span><span class="mono">$${cushionAmount.toFixed(2)}</span></div>
+    <div class="total-line" style="font-size:16px;"><span>= Total savings target before moving</span><span class="mono">$${savingsGoalTotal.toFixed(2)}</span></div>
+    <div class="total-line"><span>− Current savings</span><span class="mono">$${currentSavings.toFixed(2)}</span></div>
+    <div class="total-line" style="font-size:16px; border-top:2px solid var(--ink);"><span>Still needed</span><span class="mono">$${stillNeeded.toFixed(2)}</span></div>
+    <p style="margin:16px 0 4px; font-size:14.5px;">${surplusLine}</p>
+    <p style="margin:0; font-size:14.5px;">${goalLine}</p>
+  `;
+}
+function renderLiteracyChecklist(){
+  const el = document.getElementById('literacyChecklist');
+  if(!el) return;
+  el.innerHTML = LITERACY_ITEMS.map((item,i)=>`
+    <li><input type="checkbox" ${state.financial.literacy[i]?'checked':''} onchange="state.financial.literacy[${i}]=this.checked; queueSave();"><span>${item}</span></li>`).join('');
+}
+
+function renderCostRows(){
+  document.getElementById('costRows').innerHTML = state.financial.costs.map((c,i)=>`
+    <tr>
+      <td>
+        <select onchange="state.financial.costs[${i}].category=this.value; queueSave(); renderCostRows();">
+          <option value="" ${!c.category?'selected':''} disabled>Choose a category…</option>
+          ${AREA_OPTIONS.map(o=>`<option ${c.category===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+        ${c.category==="Other (type your own)" ? `<input type="text" value="${c.categoryCustom||''}" oninput="state.financial.costs[${i}].categoryCustom=this.value; queueSave();" placeholder="Describe it" style="margin-top:6px;">` : ''}
+      </td>
+      <td><input type="number" value="${c.amount}" oninput="state.financial.costs[${i}].amount=this.value; queueSave(); renderFinancialTotal();" placeholder="0"></td>
+      <td><input type="text" value="${c.notes}" oninput="state.financial.costs[${i}].notes=this.value; queueSave();" placeholder=""></td>
+      <td><button class="del-row" onclick="delRow('financial','costs',${i}); renderFinancialTotal();">✕</button></td>
+    </tr>`).join('');
+}
+function renderFinancialTotal(){
+  const total = state.financial.costs.reduce((s,c)=>s + (parseFloat(c.amount)||0), 0);
+  const el = document.getElementById('costTotalDisplay');
+  if(el) el.textContent = '$' + total.toFixed(2);
+  renderBudgetSummary();
+}
+function renderFinancialSubs(){
+  renderLiteracyChecklist();
+  renderCostRows();
+  renderMoveInRows();
+  renderCushionPills();
+  renderBudgetSummary();
+}
+
+// ---------- CAREER ----------
+const RESUME_ITEMS = ["Contact info is current","Professional email address","LinkedIn is current","Skills section matches the job description","No spelling or grammar errors","Clean, easy-to-scan formatting"];
+const COVER_ITEMS = ["Customized to this specific role","Researched the organization","Explains why THIS job, specifically","Uses concrete examples, not vague claims","Under one page"];
+
+const MILESTONES = [
+  {n:10, label:"You're brave and trying.", meaning:"You showed up. You applied. That takes courage.", prompt:"What did it take to keep applying after the first few no's?"},
+  {n:25, label:"You're learning patterns.", meaning:"You're seeing what works and what doesn't — you're getting smarter about this.", prompt:"What pattern are you starting to notice across these rejections?"},
+  {n:50, label:"You're building resilience.", meaning:"Fifty no's means fifty chances to learn. You're not breaking. You're growing.", prompt:"What's changed in your resume, cover letter, or approach since you started?"},
+  {n:75, label:"You're almost there.", meaning:"This is where most people quit. You didn't. That's the difference between dreamers and doers.", prompt:"What's kept you going when it would've been easier to stop?"},
+  {n:100, label:"You're unstoppable.", meaning:"You didn't let rejection define you. You let it refine you.", prompt:"Looking back at all of it — what does this prove about you?"}
+];
+function renderMilestone(m, count){
+  const hit = count >= m.n;
+  const reflection = state.career.milestoneReflections[m.n] || '';
+  const mark = state.career.milestoneMarks[m.n] || '';
+  return `
+  <div class="card" style="background:${hit ? 'var(--paper-raised)' : 'var(--paper)'}; border-color:${hit ? 'var(--sage)' : 'var(--line)'}; margin-bottom:14px;">
+    <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:4px;">
+      <span class="display" style="font-size:26px; font-weight:600; color:${hit?'var(--sage-deep)':'var(--ink-soft)'};">${m.n}</span>
+      <span style="font-weight:600; font-size:15px;">${m.label}</span>
+      <span style="margin-left:auto; font-size:12.5px; color:var(--ink-soft);">${hit ? 'Reached' : (m.n - count) + ' to go'}</span>
+    </div>
+    <p class="card-sub" style="margin-bottom:14px;">${m.meaning}</p>
+    <label>How we'll mark this when we get there (optional — a family call, not a script)</label>
+    <input type="text" value="${mark}" oninput="state.career.milestoneMarks[${m.n}]=this.value; queueSave();" placeholder="e.g. dinner out, a favorite treat, or just saying so out loud">
+    ${hit ? `
+      <label style="margin-top:12px; display:block;">${m.prompt}</label>
+      <textarea oninput="state.career.milestoneReflections[${m.n}]=this.value; queueSave();" placeholder="Take a minute with this one.">${reflection}</textarea>
+    ` : ''}
+  </div>`;
+}
+function renderCareer(){
+  const c = state.career;
+  const rejCount = c.rejections.length;
+  return `
+  <p class="module-eyebrow">Module 2</p>
+  <h1>Career &amp; Search</h1>
+  <p class="module-intro">Applying to everything burns energy. Applying to things you actually want is what works — and every "no" is proof you're in the arena, not a verdict on your worth.</p>
+  <p class="framing-quote">"The 'no' almost never contains full information about you. Getting an interview at all is already evidence your materials and your presence work."</p>
+
+  <div class="card">
+    <h2>What does "success" look like for you right now?</h2>
+    <p class="card-sub">There's more than one right answer. Naming it keeps the rest of this module from defaulting to "full-time job" if that's not actually the goal yet.</p>
+    <div class="pill-toggle">${["Full-time job","Part-time + school","Freelance / gig work","An intentional pause, and that's okay"].map(o=>`<span class="pill ${c.successType===o?'on':''}" onclick="state.career.successType='${o}'; queueSave(); render();">${o}</span>`).join('')}</div>
+  </div>
+
+  <div class="card">
+    <h2>Weekly search targets</h2>
+    <p class="card-sub">Quality over quantity, but quantity still needs a number. These two goals feed directly into the Weekly Guide you can generate from the sidebar — a printable to-do list for the week ahead.</p>
+    <div class="row">
+      <div><label>Minimum applications per week</label><input type="number" value="${c.weeklyAppGoal}" oninput="state.career.weeklyAppGoal=this.value; queueSave();" placeholder="e.g. 5"></div>
+      <div><label>Networking conversations per week</label><input type="number" value="${c.weeklyNetworkGoal}" oninput="state.career.weeklyNetworkGoal=this.value; queueSave();" placeholder="e.g. 1"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Industries &amp; roles that genuinely interest you</h2>
+    <table>
+      <tr><th>Industry / role</th><th>Why it matters to me</th><th></th></tr>
+      <tbody id="industryRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('career','industries',{name:'',why:''})">+ Add one</button>
+  </div>
+
+  <div class="card">
+    <h2>Resume &amp; cover letter check</h2>
+    <p class="card-sub">Resume</p>
+    <ul class="checklist" id="resumeChecklist"></ul>
+    <p class="card-sub">Cover letter</p>
+    <ul class="checklist" id="coverChecklist"></ul>
+  </div>
+
+  <div class="card">
+    <h2>Applications</h2>
+    <table>
+      <tr><th>Position</th><th>Org</th><th>Date</th><th>Status</th><th></th></tr>
+      <tbody id="applicationRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('career','applications',{position:'',org:'',date:'',status:'Submitted'})">+ Add application</button>
+  </div>
+
+  <div class="card">
+    <h2>Wins along the way</h2>
+    <p class="card-sub">The rejection tracker gets its own project below because rejection is hard to sit with. Good things deserve the same attention — log them here as they happen, not just at the end of a bad week.</p>
+    <table>
+      <tr><th>Date</th><th>Category</th><th>What happened</th><th></th></tr>
+      <tbody id="winsRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('career','wins',{date:'',category:'',description:''})">+ Log a win</button>
+  </div>
+
+  <div class="card">
+    <h2>The 100 No's Project</h2>
+    <p class="card-sub">Many people stop pursuing opportunities because rejection feels like failure. It doesn't have to work that way: every rejection means you had the courage to try, means someone reviewed your work, is feedback rather than judgment, and makes you a little more practiced at this. The goal isn't literally to collect 100 and stop — it's to keep going on the way to the right Yes, whether that lands at rejection #12 or #90.</p>
+    <div class="count-banner">Logged so far: <b>${rejCount}</b></div>
+    <table>
+      <tr><th>Position / Org</th><th>What I learned</th><th>What I'll try differently</th><th></th></tr>
+      <tbody id="rejectionRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('career','rejections',{role:'',learned:'',different:''})">+ Log a rejection</button>
+
+    <div style="margin-top:26px;">
+      ${MILESTONES.map(m => renderMilestone(m, rejCount)).join('')}
+    </div>
+  </div>
+
+  ${completeToggle('career')}
+  ${navButtons()}
+  `;
+}
+function renderCareerSubs(){
+  document.getElementById('industryRows').innerHTML = state.career.industries.map((r,i)=>`
+    <tr><td><input type="text" value="${r.name}" oninput="state.career.industries[${i}].name=this.value; queueSave();"></td>
+    <td><input type="text" value="${r.why}" oninput="state.career.industries[${i}].why=this.value; queueSave();"></td>
+    <td><button class="del-row" onclick="delRow('career','industries',${i})">✕</button></td></tr>`).join('');
+
+  document.getElementById('winsRows').innerHTML = state.career.wins.map((w,i)=>`
+    <tr><td><input type="date" value="${w.date}" oninput="state.career.wins[${i}].date=this.value; queueSave();"></td>
+    <td><select onchange="state.career.wins[${i}].category=this.value; queueSave();">
+      <option value="" ${!w.category?'selected':''} disabled>Choose…</option>
+      ${["Positive response","Interview scheduled","Compliment / positive feedback","Personal growth moment","Other"].map(o=>`<option ${w.category===o?'selected':''}>${o}</option>`).join('')}
+    </select></td>
+    <td><input type="text" value="${w.description}" oninput="state.career.wins[${i}].description=this.value; queueSave();" placeholder="Brief note"></td>
+    <td><button class="del-row" onclick="delRow('career','wins',${i})">✕</button></td></tr>`).join('');
+
+  document.getElementById('applicationRows').innerHTML = state.career.applications.map((r,i)=>`
+    <tr><td><input type="text" value="${r.position}" oninput="state.career.applications[${i}].position=this.value; queueSave();"></td>
+    <td><input type="text" value="${r.org}" oninput="state.career.applications[${i}].org=this.value; queueSave();"></td>
+    <td><input type="date" value="${r.date}" oninput="state.career.applications[${i}].date=this.value; queueSave();"></td>
+    <td><select onchange="state.career.applications[${i}].status=this.value; queueSave();">
+      ${["Submitted","Interview","Rejected","Offer","No response"].map(s=>`<option ${r.status===s?'selected':''}>${s}</option>`).join('')}
+    </select></td>
+    <td><button class="del-row" onclick="delRow('career','applications',${i})">✕</button></td></tr>`).join('');
+
+  document.getElementById('rejectionRows').innerHTML = state.career.rejections.map((r,i)=>`
+    <tr><td><input type="text" value="${r.role}" oninput="state.career.rejections[${i}].role=this.value; queueSave();"></td>
+    <td><input type="text" value="${r.learned}" oninput="state.career.rejections[${i}].learned=this.value; queueSave();"></td>
+    <td><input type="text" value="${r.different}" oninput="state.career.rejections[${i}].different=this.value; queueSave();"></td>
+    <td><button class="del-row" onclick="delRow('career','rejections',${i}); render();">✕</button></td></tr>`).join('');
+
+  document.getElementById('resumeChecklist').innerHTML = RESUME_ITEMS.map((item,i)=>`
+    <li><input type="checkbox" ${state.career.checklist['r'+i]?'checked':''} onchange="state.career.checklist['r${i}']=this.checked; queueSave();"><span>${item}</span></li>`).join('');
+  document.getElementById('coverChecklist').innerHTML = COVER_ITEMS.map((item,i)=>`
+    <li><input type="checkbox" ${state.career.checklist['c'+i]?'checked':''} onchange="state.career.checklist['c${i}']=this.checked; queueSave();"><span>${item}</span></li>`).join('');
+}
+
+// ---------- HOUSEHOLD ----------
+const MOVEOUT_ITEMS = ["Closet sorted and reduced","Papers & important documents organized","Donate/discard pile removed from the room","Non-essentials packed and labeled","Essentials kept accessible","Room could be left with reasonable notice"];
+
+function renderHousehold(){
+  const h = state.household;
+  return `
+  <p class="module-eyebrow">Module 5</p>
+  <h1>Household &amp; Life Skills</h1>
+  <p class="module-intro">Build your own routine rather than inheriting someone else's — ownership is the whole point. Add the tasks that actually apply to your space.</p>
+  <p class="framing-quote">"A checklist someone hands you produces short-term compliance. A routine you built yourself is the thing that actually transfers."</p>
+
+  <div class="card">
+    <h2>My routine</h2>
+    <p class="card-sub">It's easy to only think of the obvious stuff (dishes, trash) and forget the less visible categories — personal admin, self-care, outdoor or vehicle upkeep — until they've piled up. The dropdown below covers the usual areas; add your own for anything specific to your space.</p>
+    <table>
+      <tr><th style="width:44%">Task</th><th>How often</th><th></th></tr>
+      <tbody id="routineRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('household','routine',{task:'',taskCustom:'',freq:'Weekly'})">+ Add a task</button>
+    <button class="add-row" style="margin-left:18px;" onclick="addStarterRoutine()">+ Add a starter set to edit</button>
+  </div>
+
+  <div class="card">
+    <h2>Move-out readiness</h2>
+    <ul class="checklist" id="moveoutChecklist"></ul>
+  </div>
+
+  ${completeToggle('household')}
+  ${navButtons()}
+  `;
+}
+const ROUTINE_TASK_OPTIONS = [
+  "Kitchen reset (dishes, counters, stovetop)",
+  "Full fridge / pantry clean-out",
+  "Trash & recycling out",
+  "Laundry (wash, dry, fold, put away)",
+  "Common area tidying (shared spaces)",
+  "Bathroom cleaning",
+  "Vacuuming / floor care",
+  "Grocery shopping & meal planning",
+  "Bills & mail check-in",
+  "Budget / spending check-in",
+  "Car maintenance & cleaning",
+  "Pet care",
+  "Plant / outdoor care",
+  "Personal admin (appointments, paperwork, calls)",
+  "Self-care basics (sleep, exercise, hygiene routine)",
+  "Other (type your own)"
+];
+function addStarterRoutine(){
+  const starter = [
+    {task:"Kitchen reset (dishes, counters, stovetop)", taskCustom:"", freq:"Daily"},
+    {task:"Trash & recycling out", taskCustom:"", freq:"Weekly"},
+    {task:"Laundry (wash, dry, fold, put away)", taskCustom:"", freq:"Weekly"},
+    {task:"Common area tidying (shared spaces)", taskCustom:"", freq:"Weekly"},
+    {task:"Bills & mail check-in", taskCustom:"", freq:"Weekly"},
+    {task:"Personal admin (appointments, paperwork, calls)", taskCustom:"", freq:"Monthly"},
+    {task:"Self-care basics (sleep, exercise, hygiene routine)", taskCustom:"", freq:"Daily"}
+  ];
+  state.household.routine = state.household.routine.concat(starter);
+  queueSave();
+  render();
+}
+function renderHouseholdSubs(){
+  document.getElementById('routineRows').innerHTML = state.household.routine.map((r,i)=>`
+    <tr><td>
+      <select onchange="state.household.routine[${i}].task=this.value; queueSave(); renderHouseholdSubs();">
+        <option value="" ${!r.task?'selected':''} disabled>Choose a task…</option>
+        ${ROUTINE_TASK_OPTIONS.map(o=>`<option ${r.task===o?'selected':''}>${o}</option>`).join('')}
+      </select>
+      ${r.task==="Other (type your own)" ? `<input type="text" value="${r.taskCustom||''}" oninput="state.household.routine[${i}].taskCustom=this.value; queueSave();" placeholder="Describe it" style="margin-top:6px;">` : ''}
+    </td>
+    <td><select onchange="state.household.routine[${i}].freq=this.value; queueSave();">
+      ${["Daily","Weekly","Monthly","As needed"].map(s=>`<option ${r.freq===s?'selected':''}>${s}</option>`).join('')}
+    </select></td>
+    <td><button class="del-row" onclick="delRow('household','routine',${i})">✕</button></td></tr>`).join('');
+
+  document.getElementById('moveoutChecklist').innerHTML = MOVEOUT_ITEMS.map((item,i)=>`
+    <li><input type="checkbox" ${state.household.moveOut[i]?'checked':''} onchange="state.household.moveOut[${i}]=this.checked; queueSave();"><span>${item}</span></li>`).join('');
+}
+
+// ---------- EMOTIONAL ----------
+const REFLECTION_PROMPTS = [
+  {key:"lostWhy", q:"Was this about my ability, or about circumstances outside my control?"},
+  {key:"learned", q:"What did I actually learn from this?"},
+  {key:"different", q:"What would I try differently next time?"},
+  {key:"stillWant", q:"Do I still want this — and if so, is it worth another try later?"},
+  {key:"hard", q:"What's genuinely hard right now that I haven't said out loud yet?"}
+];
+function renderEmotional(){
+  const e = state.emotional.reflections;
+  return `
+  <p class="module-eyebrow">Module 3</p>
+  <h1>Resilience</h1>
+  <p class="module-intro">Rejection can feel personal even when it isn't. This space is for sitting with it honestly — not just logging it and moving on.</p>
+  <p class="framing-quote">"If this starts to look heavier than normal stuckness, that's not a failure of this process. Bringing in more support alongside it is part of doing it well."</p>
+  <div class="card">
+    <h2>After a hard "no"</h2>
+    ${REFLECTION_PROMPTS.map(p=>`
+      <label>${p.q}</label>
+      <textarea oninput="state.emotional.reflections['${p.key}']=this.value; queueSave();">${e[p.key]||''}</textarea>
+    `).join('')}
+  </div>
+  <div class="note">If rejection is bringing up feelings that feel bigger than the situation — like it's confirming something you already believed about yourself — that's worth talking through with someone you trust, not just writing down here.</div>
+
+  <div class="card">
+    <h2>When it's heavier than normal stuckness</h2>
+    <p class="card-sub">Procrastination, low motivation, and fear of rejection are normal parts of this process. It's worth paying attention if things start to look more like: persistent low mood or hopelessness lasting weeks, avoidance so complete that basic steps have stopped entirely, using alcohol or other substances to get through hard days, or anxiety that's disrupting sleep and daily functioning. None of that means this workbook was the wrong idea — it means it's time to loop in a doctor, therapist, or someone else qualified, alongside everything here rather than instead of it.</p>
+  </div>
+  ${completeToggle('emotional')}
+  ${navButtons()}
+  `;
+}
+
+// ---------- PROGRESS & WINS ----------
+function progressStats(){
+  const c = state.career;
+  const interviewCount = c.applications.filter(a => a.status==="Interview" || a.status==="Offer").length;
+  const milestonesReached = MILESTONES.filter(m => c.rejections.length >= m.n).length;
+  const moveOutVals = Object.values(state.household.moveOut);
+  const moveOutPct = moveOutVals.length ? Math.round((moveOutVals.filter(Boolean).length / MOVEOUT_ITEMS.length) * 100) : 0;
+  const modulesComplete = Object.values(state.moduleComplete).filter(Boolean).length;
+  return {
+    applications: c.applications.length,
+    interviews: interviewCount,
+    careerWins: c.wins.length,
+    rejections: c.rejections.length,
+    milestonesReached,
+    routineTasks: state.household.routine.length,
+    moveOutPct,
+    modulesComplete
+  };
+}
+function renderProgress(){
+  const p = state.progress;
+  const s = progressStats();
+  return `
+  <p class="module-eyebrow">Module 4</p>
+  <h1>Progress &amp; Wins</h1>
+  <p class="module-intro">This whole workbook is mostly about building a plan. This module is the pause button — a place to actually see how much has already moved, in numbers and in your own words.</p>
+  <p class="framing-quote">"Progress rarely feels dramatic while it's happening. It's usually visible only when you stop and add it up."</p>
+
+  <div class="card">
+    <h2>Where things stand right now</h2>
+    <p class="card-sub">Pulled automatically from what you've already logged elsewhere — nothing to fill in here.</p>
+    <div class="milestones">
+      <div class="milestone hit"><div class="num">${s.applications}</div><div class="lbl">Applications sent</div></div>
+      <div class="milestone hit"><div class="num">${s.interviews}</div><div class="lbl">Interviews / offers</div></div>
+      <div class="milestone hit"><div class="num">${s.careerWins}</div><div class="lbl">Wins logged</div></div>
+      <div class="milestone hit"><div class="num">${s.rejections}</div><div class="lbl">No's collected</div></div>
+    </div>
+    <div class="milestones">
+      <div class="milestone hit"><div class="num">${s.milestonesReached}/5</div><div class="lbl">100 No's milestones</div></div>
+      <div class="milestone hit"><div class="num">${s.routineTasks}</div><div class="lbl">Routine tasks built</div></div>
+      <div class="milestone hit"><div class="num">${s.moveOutPct}%</div><div class="lbl">Move-out ready</div></div>
+      <div class="milestone hit"><div class="num">${s.modulesComplete}/${MODULES.length}</div><div class="lbl">Modules marked done</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Wins beyond the job search</h2>
+    <p class="card-sub">Independence isn't only measured in applications. Log the other stuff too — a hard conversation handled well, a habit that's sticking, a moment that surprised you.</p>
+    <table>
+      <tr><th>Date</th><th>Area</th><th>What happened</th><th></th></tr>
+      <tbody id="lifeWinsRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('progress','lifeWins',{date:'',area:'',description:''})">+ Log a win</button>
+  </div>
+
+  <div class="card">
+    <h2>Take stock</h2>
+    <label>What's working right now that wasn't a few months ago?</label>
+    <textarea oninput="state.progress.reflections.working=this.value; queueSave();">${p.reflections.working||''}</textarea>
+    <label>What am I proud of, even if it's small?</label>
+    <textarea oninput="state.progress.reflections.proud=this.value; queueSave();">${p.reflections.proud||''}</textarea>
+    <label>What's becoming easier, even if it's still hard?</label>
+    <textarea oninput="state.progress.reflections.easier=this.value; queueSave();">${p.reflections.easier||''}</textarea>
+  </div>
+
+  ${completeToggle('progress')}
+  ${navButtons()}
+  `;
+}
+function renderProgressSubs(){
+  const el = document.getElementById('lifeWinsRows');
+  if(!el) return;
+  el.innerHTML = state.progress.lifeWins.map((w,i)=>`
+    <tr><td><input type="date" value="${w.date}" oninput="state.progress.lifeWins[${i}].date=this.value; queueSave();"></td>
+    <td><select onchange="state.progress.lifeWins[${i}].area=this.value; queueSave();">
+      <option value="" ${!w.area?'selected':''} disabled>Choose…</option>
+      ${["Personal growth","Household","Relationships","Self-care","Other"].map(o=>`<option ${w.area===o?'selected':''}>${o}</option>`).join('')}
+    </select></td>
+    <td><input type="text" value="${w.description}" oninput="state.progress.lifeWins[${i}].description=this.value; queueSave();" placeholder="Brief note"></td>
+    <td><button class="del-row" onclick="delRow('progress','lifeWins',${i})">✕</button></td></tr>`).join('');
+}
+
+// ---------- RELATIONAL ----------
+function renderRelational(){
+  const r = state.relational;
+  return `
+  <p class="module-eyebrow">Module 6</p>
+  <h1>Staying Connected</h1>
+  <p class="module-intro">A weekly check-in works best as a two-way conversation — both people share, both people listen.</p>
+  <p class="framing-quote">"If it's always one person asking questions and the other answering, it's a debrief, not a check-in."</p>
+
+  <div class="card">
+    <h2>Weekly check-in</h2>
+    <table>
+      <tr><th>Week of</th><th>Their win / challenge</th><th>My win / challenge</th><th>One thing to try next week</th><th></th></tr>
+      <tbody id="checkinRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('relational','checkins',{week:'',theirs:'',mine:'',next:''})">+ Add this week</button>
+  </div>
+
+  <div class="card">
+    <h2>An outside voice</h2>
+    <p class="card-sub">If there's someone in the picture playing a mentor or accountability role — a relative, family friend, former teacher — note how you'll use that relationship well.</p>
+    <label>Who, and what they're good for</label>
+    <textarea oninput="state.relational.scripts.who=this.value; queueSave();" placeholder="e.g. My aunt Ellen — resume feedback and mock interviews.">${r.scripts.who||''}</textarea>
+    <label>How I'll ask for help (a specific ask beats "I don't know what to do")</label>
+    <textarea oninput="state.relational.scripts.ask=this.value; queueSave();" placeholder="e.g. 'Can you review this cover letter and tell me if it's clear why I want THIS role?'">${r.scripts.ask||''}</textarea>
+  </div>
+
+  ${completeToggle('relational')}
+  ${navButtons()}
+  `;
+}
+function renderRelationalSubs(){
+  document.getElementById('checkinRows').innerHTML = state.relational.checkins.map((c,i)=>`
+    <tr><td><input type="text" value="${c.week}" oninput="state.relational.checkins[${i}].week=this.value; queueSave();" placeholder="e.g. Jul 21"></td>
+    <td><input type="text" value="${c.theirs}" oninput="state.relational.checkins[${i}].theirs=this.value; queueSave();"></td>
+    <td><input type="text" value="${c.mine}" oninput="state.relational.checkins[${i}].mine=this.value; queueSave();"></td>
+    <td><input type="text" value="${c.next}" oninput="state.relational.checkins[${i}].next=this.value; queueSave();"></td>
+    <td><button class="del-row" onclick="delRow('relational','checkins',${i})">✕</button></td></tr>`).join('');
+}
+
+// ---------- AFTER THE MOVE ----------
+function renderAfterMove(){
+  const m = state.aftermove;
+  return `
+  <p class="module-eyebrow">Module 7</p>
+  <h1>After the Move</h1>
+  <p class="module-intro">Independence doesn't end at the move-out date — the first few months are usually where things get tested. This is a lighter check-in, not a return to the old system.</p>
+  <p class="framing-quote">"Moving out and getting a job is not the same as being fully financially independent on day one. Real independence is usually a taper, not a cliff edge — and that's normal, not a sign anything went wrong."</p>
+
+  <div class="note">It's easy to treat "moved out + employed" as the finish line, and then feel like something failed if support is still needed after that. It usually isn't a failure — it's how this actually goes for most people. A parent might keep covering a phone plan for a few months, stay on the car insurance until the first raise, or help with a security deposit shortfall even after someone's been working for a while. The goal of this section is to make that phase-out explicit and time-bound, instead of open-ended and awkward for both people.</div>
+
+  <div class="card">
+    <h2>Support Taper Plan</h2>
+    <p class="card-sub">For anything still being covered after the move, name it, what it looks like right now, and when — realistically — it tapers down or ends. A category with no clear plan tends to just continue by default, which is exactly what creates confusion or resentment later.</p>
+    <table>
+      <tr><th style="width:26%">Category</th><th>Support right after moving</th><th>Plan to taper it down</th><th>Target date for full independence on this</th><th></th></tr>
+      <tbody id="taperRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('aftermove','taper',{area:'',areaCustom:'',current:'',plan:'',targetDate:''})">+ Add a category</button>
+  </div>
+
+  <div class="card">
+    <h2>First few months</h2>
+    <table>
+      <tr><th>Month</th><th>What's working</th><th>What's hard</th><th></th></tr>
+      <tbody id="aftermoveRows"></tbody>
+    </table>
+    <button class="add-row" onclick="addRow('aftermove','checkins',{month:'',working:'',hard:''})">+ Add a check-in</button>
+  </div>
+
+  <div class="note">If it doesn't go smoothly — a job falls through, money runs out, a living situation collapses — that's not a referendum on whether this whole process worked. There can be a way back. Naming what that looks like now means it isn't decided in a panic later.</div>
+
+  <div class="card">
+    <h2>If we need a way back</h2>
+    <label>What a temporary return or extra support would look like, if it's ever needed</label>
+    <textarea oninput="state.aftermove.notes.wayBack=this.value; queueSave();" placeholder="e.g. A few months back home while regrouping isn't a failure — here's what that would look like...">${m.notes.wayBack||''}</textarea>
+  </div>
+
+  ${completeToggle('aftermove')}
+  ${navButtons()}
+  `;
+}
+function renderAfterMoveSubs(){
+  const el = document.getElementById('aftermoveRows');
+  if(!el) return;
+  el.innerHTML = state.aftermove.checkins.map((c,i)=>`
+    <tr><td><input type="text" value="${c.month}" oninput="state.aftermove.checkins[${i}].month=this.value; queueSave();" placeholder="e.g. Month 1"></td>
+    <td><input type="text" value="${c.working}" oninput="state.aftermove.checkins[${i}].working=this.value; queueSave();"></td>
+    <td><input type="text" value="${c.hard}" oninput="state.aftermove.checkins[${i}].hard=this.value; queueSave();"></td>
+    <td><button class="del-row" onclick="delRow('aftermove','checkins',${i})">✕</button></td></tr>`).join('');
+
+  const taperEl = document.getElementById('taperRows');
+  if(taperEl){
+    taperEl.innerHTML = state.aftermove.taper.map((t,i)=>`
+      <tr>
+        <td>
+          <select onchange="state.aftermove.taper[${i}].area=this.value; queueSave(); renderAfterMoveSubs();">
+            <option value="" ${!t.area?'selected':''} disabled>Choose a category…</option>
+            ${AREA_OPTIONS.map(o=>`<option ${t.area===o?'selected':''}>${o}</option>`).join('')}
+          </select>
+          ${t.area==="Other (type your own)" ? `<input type="text" value="${t.areaCustom||''}" oninput="state.aftermove.taper[${i}].areaCustom=this.value; queueSave();" placeholder="Describe it" style="margin-top:6px;">` : ''}
+        </td>
+        <td><input type="text" value="${t.current}" oninput="state.aftermove.taper[${i}].current=this.value; queueSave();" placeholder="e.g. Parents pay full premium"></td>
+        <td><input type="text" value="${t.plan}" oninput="state.aftermove.taper[${i}].plan=this.value; queueSave();" placeholder="e.g. Split 50/50 after 3 months"></td>
+        <td><input type="date" value="${t.targetDate}" oninput="state.aftermove.taper[${i}].targetDate=this.value; queueSave();"></td>
+        <td><button class="del-row" onclick="delRow('aftermove','taper',${i})">✕</button></td>
+      </tr>`).join('');
+  }
+}
+
+// ---------- generic row helpers ----------
+function addRow(moduleId, listKey, template){
+  state[moduleId][listKey].push(Object.assign({}, template));
+  queueSave();
+  render();
+}
+function delRow(moduleId, listKey, index){
+  state[moduleId][listKey].splice(index,1);
+  queueSave();
+  render();
+}
+
+const RENDERERS = {
+  foundation: renderFoundation,
+  financial: renderFinancial,
+  career: renderCareer,
+  household: renderHousehold,
+  emotional: renderEmotional,
+  progress: renderProgress,
+  relational: renderRelational,
+  aftermove: renderAfterMove
+};
+const SUB_RENDERERS = {
+  foundation: renderAgreementRows,
+  financial: renderFinancialSubs,
+  career: renderCareerSubs,
+  household: renderHouseholdSubs,
+  progress: renderProgressSubs,
+  relational: renderRelationalSubs,
+  aftermove: renderAfterMoveSubs
+};
+
+function render(){
+  renderTrail();
+  const main = document.getElementById('main');
+  main.innerHTML = MODULES.map(m=>`<section class="module ${current===m.id?'visible':''}" id="mod-${m.id}"></section>`).join('');
+  MODULES.forEach(m=>{
+    try{
+      document.getElementById('mod-'+m.id).innerHTML = RENDERERS[m.id]();
+    }catch(e){
+      document.getElementById('mod-'+m.id).innerHTML = `<div class="note">This section hit a snag loading (${e.message}). Try "Clear my answers" if this persists, or download a backup first to keep your other data.</div>`;
+      console.error('Render error in module', m.id, e);
+    }
+  });
+  Object.keys(SUB_RENDERERS).forEach(k=>{
+    try{ SUB_RENDERERS[k](); }
+    catch(e){ console.error('Sub-render error in module', k, e); }
+  });
+}
+
+// ---------- STATIC PRINT VIEW ----------
+// Textareas and inputs clip their own content when printed directly (they only
+// show what's visible in the box, not the full value). So instead of printing
+// the live form, we build a plain, static document straight from `state` —
+// every value becomes wrapping text with no fixed-height container to clip it.
+
+function esc(v){
+  return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function pvField(label, value){
+  const v = (value||'').toString().trim();
+  return `<div class="pv-field"><div class="pv-label">${esc(label)}</div><div class="pv-value">${v ? esc(v) : '<span class="pv-empty">Not filled in</span>'}</div></div>`;
+}
+function pvTable(headers, rows, nowrapCols){
+  nowrapCols = nowrapCols || [];
+  if(!rows.length) return `<p class="pv-empty">Nothing logged yet.</p>`;
+  return `<table><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr>${
+    rows.map(r=>`<tr>${r.map((c,i)=>`<td${nowrapCols.includes(i)?' style="white-space:nowrap"':''}>${esc(c)}</td>`).join('')}</tr>`).join('')
+  }</table>`;
+}
+function pvChecklist(items, checkedFn){
+  return `<ul class="pv-check">${items.map((item,i)=>`<li>${checkedFn(i)?'☑':'☐'} ${esc(item)}</li>`).join('')}</ul>`;
+}
+function pvDate(value){
+  if(!value) return '';
+  const parts = String(value).split('-');
+  if(parts.length !== 3) return value;
+  const [y,m,d] = parts;
+  return `${m}/${d}/${y}`;
+}
+function resolveOther(value, customValue, otherLabel){
+  return value===otherLabel ? (customValue || '(not specified)') : (value || '');
+}
+
+function buildPrintView(){
+  const st = state;
+  const f = st.foundation, fin = st.financial, c = st.career, h = st.household, e = st.emotional, pr = st.progress, r = st.relational, am = st.aftermove;
+  const otherArea = "Other (type your own)";
+
+  let html = `<h1 style="text-align:center; font-size:28px;">The Next Chapter</h1>
+  <p style="text-align:center; color:var(--ink-soft); margin-bottom:30px;">Printed ${new Date().toLocaleDateString()}</p>`;
+
+  // Foundation
+  html += `<div class="pv-module"><h1>Module 0 — Foundation</h1>`;
+  html += `<h2>Your situation</h2>`;
+  html += pvField("Financial support available right now", f.situation.support);
+  html += pvField("Timeline", f.situation.timeline);
+  html += pvField("Anything else shaping the pace of this", (f.situation.considerations||[]).join(", "));
+  html += `<h2>Why this, why now</h2>`;
+  html += pvField("In our own words", f.why);
+  html += `<h2>Where we are → where we're headed</h2>`;
+  html += pvField("Right now, things look like...", f.goalNow);
+  html += pvField('"Ready" will look like...', f.goalReady);
+  html += pvField("Rough target date (it's okay to guess)", f.targetDate);
+  html += `<h2>Support Agreement</h2>`;
+  html += pvTable(["Area","Currently covered by","What's expected in return"], f.agreement.map(a=>[resolveOther(a.area,a.areaCustom,otherArea), a.coveredBy, a.expected]));
+  html += `<h2>Plan B</h2>`;
+  html += pvField("If we haven't hit the goal by the target date, then...", f.planB.ifNot);
+  html += pvField("Revisit date", pvDate(f.planB.checkinDate));
+  html += `</div>`;
+
+  // Financial
+  const totalCost = fin.costs.reduce((s,x)=>s+(parseFloat(x.amount)||0),0);
+  const moveInTotal = fin.moveInCosts.reduce((s,x)=>s+(parseFloat(x.amount)||0),0);
+  const cushionMonthsVal = fin.cushionMonths==="custom" ? (parseFloat(fin.cushionCustom)||0) : parseFloat(fin.cushionMonths||0);
+  const cushionAmount = totalCost * cushionMonthsVal;
+  const goalTotal = moveInTotal + cushionAmount;
+  const stillNeeded = Math.max(goalTotal - (parseFloat(fin.currentSavings)||0), 0);
+  html += `<div class="pv-module"><h1>Module 1 — Money &amp; Logistics</h1>`;
+  html += `<h2>Financial literacy basics</h2>`;
+  html += pvChecklist(LITERACY_ITEMS, i=>!!fin.literacy[i]);
+  html += `<h2>Real cost of living, on your own</h2>`;
+  html += pvTable(["Category","Monthly estimate","Notes"], fin.costs.map(cc=>[resolveOther(cc.category,cc.categoryCustom,otherArea), cc.amount ? '$'+cc.amount : '', cc.notes]), [1]);
+  html += pvField("Estimated monthly total", '$'+totalCost.toFixed(2));
+  html += `<h2>Move-In &amp; Savings Plan</h2>`;
+  html += pvTable(["Item","Estimated cost"], fin.moveInCosts.map(m=>[resolveOther(m.item,m.itemCustom,otherArea), m.amount ? '$'+m.amount : '']), [1]);
+  html += pvField("One-time move-in total", '$'+moveInTotal.toFixed(2));
+  html += pvField("Safety cushion", cushionMonthsVal + " months × monthly cost = $" + cushionAmount.toFixed(2));
+  html += pvField("Total savings target before moving", '$'+goalTotal.toFixed(2));
+  html += pvField("Current savings", fin.currentSavings ? '$'+fin.currentSavings : '');
+  html += pvField("Still needed", '$'+stillNeeded.toFixed(2));
+  html += pvField("Expected monthly income once working", fin.income ? '$'+fin.income : '');
+  html += `</div>`;
+
+  // Career
+  html += `<div class="pv-module"><h1>Module 2 — Career &amp; Search</h1>`;
+  html += pvField('What does "success" look like right now', c.successType);
+  html += `<h2>Industries &amp; roles of interest</h2>`;
+  html += pvTable(["Industry / role","Why it matters to me"], c.industries.map(x=>[x.name,x.why]));
+  html += `<h2>Resume check</h2>`;
+  html += pvChecklist(RESUME_ITEMS, i=>!!c.checklist['r'+i]);
+  html += `<h2>Cover letter check</h2>`;
+  html += pvChecklist(COVER_ITEMS, i=>!!c.checklist['c'+i]);
+  html += `<h2>Applications</h2>`;
+  html += pvTable(["Position","Org","Date","Status"], c.applications.map(x=>[x.position,x.org,pvDate(x.date),x.status]), [2,3]);
+  html += `<h2>Wins along the way</h2>`;
+  html += pvTable(["Date","Category","What happened"], c.wins.map(x=>[pvDate(x.date),x.category,x.description]), [0,1]);
+  html += `<h2>The 100 No's Project — ${c.rejections.length} logged</h2>`;
+  html += pvTable(["Position / Org","What I learned","What I'll try differently"], c.rejections.map(x=>[x.role,x.learned,x.different]));
+  MILESTONES.forEach(m=>{
+    const reached = c.rejections.length >= m.n;
+    html += `<div class="pv-field"><div class="pv-label">Milestone ${m.n} — ${esc(m.label)}${reached ? ' (reached)' : ''}</div>`;
+    if(c.milestoneMarks[m.n]) html += `<div class="pv-value">How we'll mark it: ${esc(c.milestoneMarks[m.n])}</div>`;
+    if(reached) html += `<div class="pv-value" style="margin-top:4px;">${esc(c.milestoneReflections[m.n]||'(reflection not filled in yet)')}</div>`;
+    html += `</div>`;
+  });
+  html += `</div>`;
+
+  // Resilience
+  html += `<div class="pv-module"><h1>Module 3 — Resilience</h1>`;
+  REFLECTION_PROMPTS.forEach(p=>{ html += pvField(p.q, e.reflections[p.key]); });
+  html += `</div>`;
+
+  // Progress & Wins
+  const stats = progressStats();
+  html += `<div class="pv-module"><h1>Module 4 — Progress &amp; Wins</h1>`;
+  html += `<h2>Where things stand</h2>`;
+  html += pvField("Applications sent", stats.applications);
+  html += pvField("Interviews / offers", stats.interviews);
+  html += pvField("Wins logged", stats.careerWins);
+  html += pvField("No's collected", stats.rejections);
+  html += pvField("100 No's milestones reached", stats.milestonesReached + "/5");
+  html += pvField("Routine tasks built", stats.routineTasks);
+  html += pvField("Move-out readiness", stats.moveOutPct + "%");
+  html += pvField("Modules marked done", stats.modulesComplete + "/" + MODULES.length);
+  html += `<h2>Wins beyond the job search</h2>`;
+  html += pvTable(["Date","Area","What happened"], pr.lifeWins.map(x=>[pvDate(x.date),x.area,x.description]), [0,1]);
+  html += `<h2>Take stock</h2>`;
+  html += pvField("What's working right now that wasn't a few months ago?", pr.reflections.working);
+  html += pvField("What am I proud of, even if it's small?", pr.reflections.proud);
+  html += pvField("What's becoming easier, even if it's still hard?", pr.reflections.easier);
+  html += `</div>`;
+
+  // Household
+  html += `<div class="pv-module"><h1>Module 5 — Household &amp; Life Skills</h1>`;
+  html += `<h2>My routine</h2>`;
+  html += pvTable(["Task","How often"], h.routine.map(x=>[resolveOther(x.task,x.taskCustom,otherArea), x.freq]), [1]);
+  html += `<h2>Move-out readiness</h2>`;
+  html += pvChecklist(MOVEOUT_ITEMS, i=>!!h.moveOut[i]);
+  html += `</div>`;
+
+  // Staying Connected
+  html += `<div class="pv-module"><h1>Module 6 — Staying Connected</h1>`;
+  html += `<h2>Weekly check-in</h2>`;
+  html += pvTable(["Week of","Their win / challenge","My win / challenge","One thing to try next week"], r.checkins.map(x=>[x.week,x.theirs,x.mine,x.next]));
+  html += `<h2>An outside voice</h2>`;
+  html += pvField("Who, and what they're good for", r.scripts.who);
+  html += pvField('How I\'ll ask for help (a specific ask beats "I don\'t know what to do")', r.scripts.ask);
+  html += `</div>`;
+
+  // After the Move
+  html += `<div class="pv-module"><h1>Module 7 — After the Move</h1>`;
+  html += `<h2>Support Taper Plan</h2>`;
+  html += pvTable(["Category","Support right after moving","Plan to taper it down","Target date for full independence"], am.taper.map(x=>[resolveOther(x.area,x.areaCustom,otherArea), x.current, x.plan, pvDate(x.targetDate)]), [3]);
+  html += `<h2>First few months</h2>`;
+  html += pvTable(["Month","What's working","What's hard"], am.checkins.map(x=>[x.month,x.working,x.hard]));
+  html += `<h2>If we need a way back</h2>`;
+  html += pvField("What a temporary return or extra support would look like, if it's ever needed", am.notes.wayBack);
+  html += `</div>`;
+
+  html += `<p style="text-align:center; color:var(--ink-soft); font-size:11px; margin-top:40px; opacity:.75;">© 2026 Brandon Reeves, LCSW. For personal and family use only — not for resale or redistribution.</p>`;
+
+  document.getElementById('printView').innerHTML = html;
+}
+
+// ---------- WEEKLY GUIDE (separate document) ----------
+function buildWeeklyView(){
+  const c = state.career, h = state.household;
+  const dailyTasks = h.routine.filter(r => r.freq === "Daily");
+  const weeklyTasks = h.routine.filter(r => r.freq === "Weekly");
+  const monthlyTasks = h.routine.filter(r => r.freq === "Monthly");
+  const otherArea = "Other (type your own)";
+  const taskLabel = r => resolveOther(r.task, r.taskCustom, otherArea);
+  const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+
+  const industries = c.industries.map(x => x.name).filter(Boolean);
+  const clampGoal = v => Math.min(Math.max(parseInt(v) || 0, 1), 30);
+  const appGoal = clampGoal(c.weeklyAppGoal || 5);
+  const networkGoal = clampGoal(c.weeklyNetworkGoal || 1);
+  const resumeRemaining = RESUME_ITEMS.filter((_,i) => !c.checklist['r'+i]);
+  const coverRemaining = COVER_ITEMS.filter((_,i) => !c.checklist['c'+i]);
+
+  function simpleChecklist(title, items){
+    if(!items.length) return `<h2>${esc(title)}</h2><p class="pv-empty">Nothing set up here yet.</p>`;
+    return `<h2>${esc(title)}</h2><ul class="pv-check">${items.map(t=>`<li>☐ ${esc(t)}</li>`).join('')}</ul>`;
+  }
+  function trackerLines(count){
+    return `<ul class="pv-tracker-list">${Array.from({length: count}).map((_,i)=>
+      `<li>☐ ${i+1}. ________________________________________</li>`).join('')}</ul>`;
+  }
+
+  let html = `<h1 style="text-align:center; font-size:26px;">Weekly Guide</h1>
+  <p style="text-align:center; color:var(--ink-soft); margin-bottom:26px;">Week of: ______________________</p>`;
+
+  // Daily tasks as a real day-by-day tracker, not a one-off checkbox
+  html += `<h2>Household — Every Day</h2>`;
+  if(dailyTasks.length){
+    html += `<table class="pv-tracker"><tr><th>Task</th>${DAYS.map(d=>`<th>${d}</th>`).join('')}</tr>`;
+    html += dailyTasks.map(r => `<tr><td>${esc(taskLabel(r))}</td>${DAYS.map(()=>`<td>☐</td>`).join('')}</tr>`).join('');
+    html += `</table>`;
+  } else {
+    html += `<p class="pv-empty">No daily tasks set up yet — add some in the Household module.</p>`;
+  }
+
+  html += simpleChecklist("Household — This Week", weeklyTasks.map(taskLabel));
+  if(monthlyTasks.length) html += simpleChecklist("Household — Also This Month, If Due", monthlyTasks.map(taskLabel));
+
+  // Career — an actual number of checkboxes to fill in as they happen, not a summary line
+  html += `<h2>Career — This Week's Targets</h2>`;
+  if(industries.length) html += `<p class="pv-doc-sub">Focus areas: ${esc(industries.slice(0,4).join(', '))}</p>`;
+
+  html += `<p class="pv-tracker-label">Applications — goal: ${appGoal}</p>`;
+  html += trackerLines(appGoal);
+
+  html += `<p class="pv-tracker-label">Networking conversations — goal: ${networkGoal}</p>`;
+  html += trackerLines(networkGoal);
+
+  if(resumeRemaining.length){
+    html += `<p class="pv-tracker-label">Resume — still to do</p>`;
+    html += `<ul class="pv-check">${resumeRemaining.map(t=>`<li>☐ ${esc(t)}</li>`).join('')}</ul>`;
+  }
+  if(coverRemaining.length){
+    html += `<p class="pv-tracker-label">Cover letter — still to do</p>`;
+    html += `<ul class="pv-check">${coverRemaining.map(t=>`<li>☐ ${esc(t)}</li>`).join('')}</ul>`;
+  }
+
+  html += `<h2>Notes, Follow-Ups &amp; Wins</h2>`;
+  html += `<p class="pv-doc-sub">Don't just log what went wrong or what's still pending — jot down the wins too as they happen: a good response, an interview scheduled, a conversation that went well, anything that felt like progress. It's easy to forget these by the weekly review if they're not written down in the moment.</p>`;
+  html += `<div class="pv-notes-box"></div>`;
+
+  html += `<p style="text-align:center; color:var(--ink-soft); font-size:11px; margin-top:40px; opacity:.75;">© 2026 Brandon Reeves, LCSW. For personal and family use only — not for resale or redistribution.</p>`;
+
+  document.getElementById('weeklyView').innerHTML = html;
+}
+
+let activePrintMode = 'full';
+const ORIGINAL_TITLE = document.title;
+
+function printWorkbook(){
+  activePrintMode = 'full';
+  document.body.classList.remove('print-mode-weekly');
+  document.title = 'The Next Chapter - Full Workbook';
+  buildPrintView();
+  window.print();
+}
+function printWeeklyGuide(){
+  activePrintMode = 'weekly';
+  document.body.classList.add('print-mode-weekly');
+  const stamp = new Date().toISOString().slice(0,10);
+  document.title = 'The Next Chapter - Weekly Guide - ' + stamp;
+  buildWeeklyView();
+  window.print();
+}
+window.addEventListener('beforeprint', ()=>{
+  if(activePrintMode === 'weekly') buildWeeklyView(); else buildPrintView();
+});
+window.addEventListener('afterprint', ()=>{
+  activePrintMode = 'full';
+  document.body.classList.remove('print-mode-weekly');
+  document.title = ORIGINAL_TITLE;
+});
+
+loadState();
+</script>
+</body>
+</html>
