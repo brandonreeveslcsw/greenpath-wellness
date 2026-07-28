@@ -4,11 +4,11 @@
 
 /* CSS Variables */
 :root {
-    --primary-green: #2d6a4f;
-    --primary-green-dark: #1b4332;
-    --primary-green-light: #40916c;
-    --accent-teal: #52b788;
-    --accent-light: #95d5b2;
+    --primary-green: #1F4B3A;
+    --primary-green-dark: #163628;
+    --primary-green-light: #2F6B52;
+    --accent-teal: #C9A876;
+    --accent-light: #DCC393;
     --neutral-dark: #2b2d42;
     --neutral-medium: #6c757d;
     --neutral-light: #f8f9fa;
@@ -1057,6 +1057,14 @@ section {
 }
 
 .footer-links a:hover {
+    color: var(--white);
+}
+
+.footer-section p a {
+    color: var(--accent-light);
+}
+
+.footer-section p a:hover {
     color: var(--white);
 }
 

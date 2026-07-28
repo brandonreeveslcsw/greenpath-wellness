@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="560" viewBox="0 0 140 140">
+  <rect width="140" height="140" fill="#1F4B3A"/>
+  <circle cx="70" cy="70" r="64" fill="none" stroke="#C9A876" stroke-width="2.5"/>
+  <text x="70" y="86" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="600" fill="#FAF7F0">GW</text>
+</svg>
