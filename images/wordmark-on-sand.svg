@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="300" viewBox="0 0 260 100">
+  <rect width="260" height="100" fill="#C9A876"/>
+  <text x="130" y="52" text-anchor="middle" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#1F4B3A" letter-spacing="-0.5">Greenpath</text>
+  <path d="M35 62 C 68 62, 68 69, 100 69 C 132 69, 132 62, 225 62"
+        fill="none" stroke="#1F4B3A" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <text x="130" y="88" text-anchor="middle" font-family="-apple-system, Helvetica, Arial, sans-serif" font-size="11" letter-spacing="3" fill="#3d5a4a">WELLNESS</text>
+</svg>
