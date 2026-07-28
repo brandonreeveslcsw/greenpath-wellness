@@ -1025,7 +1025,7 @@ section {
 
 /* Footer */
 .site-footer {
-    background: var(--neutral-dark);
+    background: var(--primary-green-dark);
     color: rgba(255, 255, 255, 0.8);
     padding: 3rem 0 1.5rem;
 }
