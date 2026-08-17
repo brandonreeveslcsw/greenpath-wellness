@@ -377,25 +377,25 @@
                         </div>
 
                         <h3 class="form-section-title">CE Hours Requested</h3>
-                        <div class="form-row four-col">
-                            <div class="form-group">
-                                <label for="hours-clinical">Clinical</label>
-                                <input type="number" id="hours-clinical" name="Hours - Clinical" min="0" step="0.25" placeholder="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="hours-ethics">Ethics</label>
-                                <input type="number" id="hours-ethics" name="Hours - Ethics" min="0" step="0.25" placeholder="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="hours-supervision">Supervision</label>
-                                <input type="number" id="hours-supervision" name="Hours - Supervision" min="0" step="0.25" placeholder="0">
-                            </div>
-                            <div class="form-group">
-                                <label for="hours-general">General</label>
-                                <input type="number" id="hours-general" name="Hours - General" min="0" step="0.25" placeholder="0">
-                            </div>
+                        <div class="form-group">
+                            <label for="program-length">Total Length of This Program (Hours) <span class="required">*</span></label>
+                            <input type="number" id="program-length" name="Total Program Length (Hours)" min="0" step="0.25" required placeholder="e.g., 3">
+                            <span class="form-help">One credit hour equals 60 minutes. Exclude breaks, meals, and announcements.</span>
                         </div>
-                        <span class="form-help">One credit hour equals 60 minutes. Exclude breaks, meals, and announcements.</span>
+                        <div class="form-group">
+                            <label>Requested CE Category(ies) <span class="required">*</span></label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option"><input type="checkbox" name="CE Category" value="Clinical"> Clinical</label>
+                                <label class="checkbox-option"><input type="checkbox" name="CE Category" value="Ethics"> Ethics</label>
+                                <label class="checkbox-option"><input type="checkbox" name="CE Category" value="Supervision"> Supervision</label>
+                                <label class="checkbox-option"><input type="checkbox" name="CE Category" value="General"> General</label>
+                            </div>
+                            <span class="form-help">Select every category the full program length above could count toward (e.g., Ethics <em>or</em> General). This isn't a split &mdash; each selected category represents an <em>option</em> for how the same full-length hours could be logged, and the participant chooses one when they claim CE credit.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-split-notes">Splitting Hours Across Categories Instead?</label>
+                            <textarea id="hours-split-notes" name="Hours Split Notes" placeholder="If different segments of your program should count as separate categories (e.g., the first hour is Ethics and the remaining two hours are Clinical), describe that breakdown here instead of relying on the checkboxes above."></textarea>
+                        </div>
 
                         <h3 class="form-section-title">Policies &amp; Recordkeeping</h3>
                         <div class="form-group">
