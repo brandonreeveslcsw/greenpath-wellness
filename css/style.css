@@ -1259,3 +1259,57 @@ section {
     color: var(--text-secondary);
     margin: 1.5rem 0;
 }
+
+/* ========================================
+   CEU Approvals - LABSWE Scoring Guide
+   ======================================== */
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.score-table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 1.05rem;
+    padding: 0.85rem 1rem 0.5rem;
+}
+
+.score-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.score-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.score-points {
+    font-weight: 700;
+    color: var(--primary-green-dark);
+    text-align: center;
+    width: 44px;
+    white-space: nowrap;
+}
+
+.score-note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--primary-green);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.score-note strong {
+    color: var(--primary-green-dark);
+}
