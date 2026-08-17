@@ -24,6 +24,16 @@
   status = 200
 
 [[redirects]]
+  from = "/ai-ethics-workshop"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
+  from = "/ai-ethics-workshop.html"
+  to = "/index.html"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
