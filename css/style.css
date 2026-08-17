@@ -1142,3 +1142,174 @@ section {
         gap: 1rem;
     }
 }
+
+/* ========================================
+   CEU Approvals - Application Form
+   ======================================== */
+.application-form {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+}
+
+.form-section-title {
+    font-size: 1.15rem;
+    color: var(--primary-green);
+    margin: 2.5rem 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.form-section-title:first-child {
+    margin-top: 0;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.5rem;
+}
+
+.form-row.four-col {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 640px) {
+    .form-row,
+    .form-row.four-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: var(--transition);
+}
+
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 0.6rem 0;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.radio-group,
+.checkbox-group {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.radio-option,
+.checkbox-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.radio-option input,
+.checkbox-option input {
+    margin-top: 0.3rem;
+    width: auto;
+}
+
+.fee-option {
+    display: block;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.fee-option:hover {
+    border-color: var(--primary-green-light);
+}
+
+.fee-option input {
+    margin-right: 0.75rem;
+    width: auto;
+}
+
+.fee-option .fee-amount {
+    font-weight: 700;
+    color: var(--primary-green-dark);
+}
+
+.form-submit-note {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+}
+
+/* ========================================
+   CEU Approvals - LABSWE Scoring Guide
+   ======================================== */
+.score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+    background: var(--neutral-light);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.score-table caption {
+    caption-side: top;
+    text-align: left;
+    font-family: 'Merriweather', Georgia, serif;
+    font-weight: 700;
+    color: var(--primary-green);
+    font-size: 1.05rem;
+    padding: 0.85rem 1rem 0.5rem;
+}
+
+.score-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+}
+
+.score-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.score-points {
+    font-weight: 700;
+    color: var(--primary-green-dark);
+    text-align: center;
+    width: 44px;
+    white-space: nowrap;
+}
+
+.score-note {
+    background: var(--accent-light);
+    border-left: 4px solid var(--primary-green);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.score-note strong {
+    color: var(--primary-green-dark);
+}

@@ -14,6 +14,16 @@
   status = 200
 
 [[redirects]]
+  from = "/ceu-approvals"
+  to = "/ceu-approvals.html"
+  status = 200
+
+[[redirects]]
+  from = "/ceu-approval-thank-you"
+  to = "/ceu-approval-thank-you.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
