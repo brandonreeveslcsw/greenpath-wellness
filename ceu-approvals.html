@@ -241,6 +241,23 @@
                             <label>Don't fill this out if you're human: <input name="bot-field" /></label>
                         </p>
 
+                        <h3 class="form-section-title">Your Contact Information</h3>
+                        <p class="form-help" style="display:block;margin:-0.5rem 0 1rem;">The person filling out this application &mdash; this might be different from the sponsoring organization's main contact, the social worker involved, or the recordkeeping contact below.</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="applicant-name">Your Name <span class="required">*</span></label>
+                                <input type="text" id="applicant-name" name="Applicant Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="applicant-email">Your Email <span class="required">*</span></label>
+                                <input type="email" id="applicant-email" name="Applicant Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicant-phone">Your Phone <span class="required">*</span></label>
+                            <input type="tel" id="applicant-phone" name="Applicant Phone" required>
+                        </div>
+
                         <h3 class="form-section-title">Program Information</h3>
                         <div class="form-group">
                             <label for="program-title">Program Title &amp; Proposed Date(s) <span class="required">*</span></label>
@@ -299,6 +316,16 @@
                             <label for="sw-consultant">Social Work Consultant / Planning Committee Member <span class="required">*</span></label>
                             <textarea id="sw-consultant" name="Social Work Consultant" required placeholder="Name, license/credentials, and role (planning, presenting, or reviewing) of the credentialed or licensed social worker involved in this program."></textarea>
                             <span class="form-help">LABSWE requires a credentialed or licensed social worker to be involved in every CE program as a consultant, planner, presenter, or reviewer.</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sw-phone">Social Worker's Phone <span class="required">*</span></label>
+                                <input type="tel" id="sw-phone" name="Social Worker Phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sw-email">Social Worker's Email <span class="required">*</span></label>
+                                <input type="email" id="sw-email" name="Social Worker Email" required>
+                            </div>
                         </div>
 
                         <h3 class="form-section-title">CE Hours Requested</h3>
@@ -361,9 +388,13 @@
 
                         <h3 class="form-section-title">Supporting Documents</h3>
                         <div class="form-group">
+                            <label for="eval-tool-description">Describe Your Evaluation Tool <span class="required">*</span></label>
+                            <textarea id="eval-tool-description" name="Evaluation Tool Description" required placeholder="Describe how you'll gather participant feedback (e.g., a post-workshop survey with a rating scale and open-ended questions). If you have a blank copy of the actual tool, attach it below instead of retyping it here."></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="attachments">Attach Available Materials</label>
                             <input type="file" id="attachments" name="Supporting Documents" multiple>
-                            <span class="form-help">Promotional brochure/flyer, instructor bio(s)/CV(s), detailed agenda, and evaluation tool. Don't have everything yet? Submit what you have and email the rest to info@greenpathwellness.com.</span>
+                            <span class="form-help">Promotional brochure/flyer, instructor bio(s)/CV(s), detailed agenda, and a blank copy of your evaluation tool (if you have one). Don't have everything yet? Submit what you have and email the rest to info@greenpathwellness.com.</span>
                         </div>
 
                         <h3 class="form-section-title">Additional Notes</h3>
