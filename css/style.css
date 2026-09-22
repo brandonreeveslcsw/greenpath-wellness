@@ -296,6 +296,11 @@ section {
     padding: 3rem;
 }
 
+.workshop-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
 .workshop-meta {
     display: flex;
     gap: 2rem;
